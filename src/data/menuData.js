@@ -16,7 +16,7 @@ export const menuData = [
             "id": "cafe-solo-espresso",
             "nameKey": "menu_cafe_solo_espresso_name",
             "price": "1.60€",
-            "image": "/images/dishes/cafe-solo-espresso.png",
+            "image": "/images/dishes/cafe-solo-espresso.jpeg",
             "descriptionKey": "menu_cafe_solo_espresso_desc",
             "ingredients": [
               "ing_cafe"
@@ -70,7 +70,7 @@ export const menuData = [
             "id": "americano",
             "nameKey": "menu_americano_name",
             "price": "1.80€",
-            "image": "/images/dishes/americano.png",
+            "image": "/images/dishes/americano.jpeg",
             "descriptionKey": "menu_americano_desc",
             "ingredients": [
               "ing_cafe",
@@ -145,7 +145,7 @@ export const menuData = [
             "id": "barraquito",
             "nameKey": "menu_barraquito_name",
             "price": "2.40€",
-            "image": "/images/dishes/barraquito.png",
+            "image": "/images/dishes/barraquito.jpeg",
             "descriptionKey": "menu_barraquito_desc",
             "ingredients": [
               "ing_cafe",
@@ -1392,7 +1392,7 @@ export const menuData = [
             "id": "agua-05",
             "nameKey": "menu_agua_05_name",
             "price": "1.80€",
-            "image": "/images/dishes/agua.png",
+            "image": "/images/dishes/aguap.jpeg",
             "descriptionKey": "menu_agua_05_desc",
             "ingredients": [
               "ing_agua"
@@ -1424,7 +1424,7 @@ export const menuData = [
             "id": "agua-gas-05",
             "nameKey": "menu_agua_gas_05_name",
             "price": "2.00€",
-            "image": "/images/dishes/agua-gas.png",
+            "image": "/images/dishes/agua-gasp.jpeg",
             "descriptionKey": "menu_agua_gas_05_desc",
             "ingredients": [
               "ing_agua"
@@ -1510,7 +1510,7 @@ export const menuData = [
             "id": "nestea",
             "nameKey": "menu_nestea_name",
             "price": "2.90€",
-            "image": "/images/dishes/nestea.png",
+            "image": "/images/dishes/Nestea.png",
             "descriptionKey": "menu_nestea_desc",
             "ingredients": [
               "ing_te"
@@ -1638,7 +1638,7 @@ export const menuData = [
             "id": "dorada-pilsen",
             "nameKey": "menu_dorada_pilsen_name",
             "price": "3.00€",
-            "image": "/images/dishes/dorada.png",
+            "image": "/images/dishes/dorada-pilsen.png",
             "descriptionKey": "menu_dorada_pilsen_desc",
             "ingredients": [
               "ing_cerveza"
@@ -1656,7 +1656,7 @@ export const menuData = [
             "id": "dorada-especial",
             "nameKey": "menu_dorada_especial_name",
             "price": "3.50€",
-            "image": "/images/dishes/dorada.png",
+            "image": "/images/dishes/dorada-especial.png",
             "descriptionKey": "menu_dorada_especial_desc",
             "ingredients": [
               "ing_cerveza"
@@ -1692,7 +1692,7 @@ export const menuData = [
             "id": "dorada-tostada",
             "nameKey": "menu_dorada_tostada_name",
             "price": "3.50€",
-            "image": "/images/dishes/dorada.png",
+            "image": "/images/dishes/dorada-tostada.png",
             "descriptionKey": "menu_dorada_tostada_desc",
             "ingredients": [
               "ing_cerveza"
@@ -1710,7 +1710,7 @@ export const menuData = [
             "id": "dorada-tostada-00",
             "nameKey": "menu_dorada_tostada_00_name",
             "price": "3.20",
-            "image": "/images/dishes/dorada.png",
+            "image": "/images/dishes/dorada-00.png",
             "descriptionKey": "menu_dorada_tostada_00_desc",
             "ingredients": [
               "ing_cerveza"
@@ -1728,7 +1728,7 @@ export const menuData = [
             "id": "dorada-00",
             "nameKey": "menu_dorada_00_name",
             "price": "3.00€",
-            "image": "/images/dishes/dorada.png",
+            "image": "/images/dishes/dorada-sin.png",
             "descriptionKey": "menu_dorada_00_desc",
             "ingredients": [
               "ing_cerveza"
@@ -1746,7 +1746,7 @@ export const menuData = [
             "id": "dorada-limon",
             "nameKey": "menu_dorada_limon_name",
             "price": "3.20€",
-            "image": "/images/dishes/dorada-limon.png",
+            "image": "/images/dishes/dorada-sin-limon.png",
             "descriptionKey": "menu_dorada_limon_desc",
             "ingredients": [
               "ing_cerveza",
@@ -1765,7 +1765,7 @@ export const menuData = [
             "id": "dorada-gluten-free",
             "nameKey": "menu_dorada_gluten_free_name",
             "price": "3.60€",
-            "image": "/images/dishes/dorada.png",
+            "image": "/images/dishes/dorada-gluten.png",
             "descriptionKey": "menu_dorada_gluten_free_desc",
             "ingredients": [
               "ing_cerveza"
@@ -2300,7 +2300,7 @@ export const menuData = [
             "id": "tabla-ibericos-queso-manchego",
             "nameKey": "menu_tabla_ibericos_queso_manchego_name",
             "price": "15.50€",
-            "image": "/images/dishes/tabla-ibericos-queso-manchego.png",
+            "image": "/images/dishes/tabla-ibericos-queso-manchego.jpeg",
             "descriptionKey": "menu_tabla_ibericos_queso_manchego_desc",
             "ingredients": [
               "ing_jamon_iberico",
@@ -2431,7 +2431,7 @@ export const menuData = [
             "id": "langostinos-empanizados",
             "nameKey": "menu_langostinos_empanizados_name",
             "price": "11.50€",
-            "image": "/images/dishes/langostinos-empanizados.png",
+            "image": "/images/dishes/langostinos-empanizados.jpeg",
             "descriptionKey": "menu_langostinos_empanizados_desc",
             "ingredients": [
               "ing_langostinos",
@@ -2454,7 +2454,7 @@ export const menuData = [
             "id": "ensaladilla-la-casita",
             "nameKey": "menu_ensaladilla_la_casita_name",
             "price": "14.50€",
-            "image": "/images/dishes/ensaladilla-la-casita.png",
+            "image": "/images/dishes/ensaladilla.jpeg",
             "descriptionKey": "menu_ensaladilla_la_casita_desc",
             "ingredients": [
               "ing_batata",
@@ -2503,7 +2503,7 @@ export const menuData = [
             "id": "tartar-atun",
             "nameKey": "menu_tartar_atun_name",
             "price": "14.60€",
-            "image": "/images/dishes/tartar-atun.png",
+            "image": "/images/dishes/tartar-atun.jpeg",
             "descriptionKey": "menu_tartar_atun_desc",
             "ingredients": [
               "ing_atun",
@@ -2906,7 +2906,7 @@ export const menuData = [
             "id": "wok-verduras",
             "nameKey": "menu_wok_verduras_name",
             "price": "15.50€",
-            "image": "/images/dishes/wok-verduras.png",
+            "image": "/images/dishes/wok-verduras.jpeg",
             "descriptionKey": "menu_wok_verduras_desc",
             "ingredients": [
               "ing_verduras",
@@ -3006,7 +3006,7 @@ export const menuData = [
             "id": "arroz-tres-delicias-langostinos",
             "nameKey": "menu_arroz_tres_delicias_langostinos_name",
             "price": "12.50€",
-            "image": "/images/dishes/arroz-tres-delicias-langostinos.png",
+            "image": "/images/dishes/3delicias.jpeg",
             "descriptionKey": "menu_arroz_tres_delicias_langostinos_desc",
             "ingredients": [
               "ing_arroz",
