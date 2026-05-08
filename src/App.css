@@ -146,8 +146,20 @@
 
 .allergen-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  grid-template-columns: repeat(4, 1fr);
   gap: 14px;
+}
+
+@media (max-width: 768px) {
+  .allergen-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .allergen-card {
+    padding: 12px 10px;
+    font-size: 0.9rem;
+    gap: 8px;
+  }
 }
 
 .allergen-card {
