@@ -331,20 +331,39 @@
 
 .hero {
   text-align: center;
-  margin-bottom: 24px;
+  margin-bottom: 32px;
+  padding: 24px 16px 12px;
 }
 
 .hero h1 {
-  margin-bottom: 10px;
+  margin: 0 0 12px;
   color: #533411;
+  line-height: 1.15;
 }
 
 .hero p {
   color: #6b4b2a;
   max-width: 500px;
   margin: 0 auto;
+  line-height: 1.45;
 }
 
+@media (max-width: 600px) {
+  .hero {
+    padding: 28px 14px 14px;
+    margin-bottom: 28px;
+  }
+
+  .hero h1 {
+    font-size: 1.75rem;
+    line-height: 1.12;
+  }
+
+  .hero p {
+    font-size: 0.98rem;
+    line-height: 1.45;
+  }
+}
 .locale-page {
   padding-top: 120px;
   min-height: 100vh;
