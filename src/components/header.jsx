@@ -101,7 +101,11 @@ function Header({ lang, changeLang }) {
       </div>
 
       <div className="header-right">
-        <span className="visitor-badge">👥 {t('visitors')} {visits}</span>
+        <span className="visitor-badge">
+        <span className="visitor-label">👥 {t('visitors')} </span>
+        <span className="visitor-mobile">👥 </span>
+        <span>{visits}</span>
+      </span>
       </div>
     </header>
   )

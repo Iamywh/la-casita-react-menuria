@@ -957,3 +957,104 @@
   border: 1px solid #d8c3a5;
   font: inherit;
 }
+
+@media (max-width: 600px) {
+  .site-header {
+    left: 6px;
+    right: 6px;
+    top: 8px;
+
+    grid-template-columns: auto 1fr auto;
+    gap: 6px;
+
+    padding: 8px 8px;
+    border-radius: 14px;
+  }
+
+  .header-center {
+    min-width: 0;
+    gap: 6px;
+  }
+
+  .logo-circle {
+    width: 32px;
+    height: 32px;
+    font-size: 7px;
+    flex-shrink: 0;
+  }
+
+  .header-center span,
+  .restaurant-title {
+    font-size: 0.95rem;
+    line-height: 1.05;
+    text-align: center;
+    max-width: 120px;
+    white-space: normal;
+  }
+
+  .menu-btn {
+    padding: 10px 12px;
+    font-size: 0.95rem;
+    white-space: nowrap;
+  }
+
+  .visitor-badge {
+    padding: 9px 10px;
+    font-size: 0.85rem;
+    max-width: 58px;
+    overflow: hidden;
+    white-space: nowrap;
+  }
+
+  .visitor-badge .visitor-text,
+  .visitor-badge span:first-child {
+    display: none;
+  }
+}
+
+.visitor-mobile {
+  display: none;
+}
+
+@media (max-width: 600px) {
+  .site-header {
+    left: 6px;
+    right: 6px;
+    top: 8px;
+    grid-template-columns: auto 1fr auto;
+    gap: 6px;
+    padding: 8px;
+  }
+
+  .header-center {
+    min-width: 0;
+    gap: 6px;
+  }
+
+  .header-center strong {
+    font-size: 0.95rem;
+    line-height: 1.05;
+    max-width: 120px;
+    text-align: center;
+  }
+
+  .menu-btn {
+    padding: 10px 12px;
+    font-size: 0.95rem;
+    white-space: nowrap;
+  }
+
+  .visitor-badge {
+    padding: 9px 10px;
+    font-size: 0.85rem;
+    white-space: nowrap;
+  }
+
+  .visitor-label {
+    display: none;
+  }
+
+  .visitor-mobile {
+    display: inline;
+  }
+}
