@@ -307,7 +307,7 @@ function MenuList({ selectedAllergen, onSelectAllergen, lang }) {
 
   return (
     <section className="menu-section">
-      <h2>{t('menu_comida')}</h2>
+      {/* <h2>{t('menu_comida')}</h2> */}
 
       {selectedAllergen && (
         <div className="filter-notice">
