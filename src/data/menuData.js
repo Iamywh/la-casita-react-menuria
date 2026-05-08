@@ -1247,7 +1247,7 @@ export const menuData = [
   {
     "id": "brunch",
     "nameKey": "menu_brunch_name",
-    "icon": "/images/categories/brunch.png",
+    "icon": "/images/icons/brunch.png",
     "schedule": {
       "start": "00:00",
       "end": "23:59"

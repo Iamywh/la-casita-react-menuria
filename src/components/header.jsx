@@ -56,7 +56,11 @@ function Header({ lang, changeLang }) {
       </div>
             
       <div className="header-center">
-        <div className="logo-circle">CASITA</div>
+        <img
+            src="/images/icons/logo.png"
+            alt="La Casita Logo"
+            className="header-logo"
+          />
         <strong>La Casita de Nazareno</strong>
 
         <div className="header-lang">
