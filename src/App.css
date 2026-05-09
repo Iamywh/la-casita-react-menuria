@@ -182,3 +182,88 @@
     border-right-color: var(--border);
   }
 }
+/* =========================
+   FOOTER
+========================= */
+
+.site-footer {
+  width: 100%;
+  margin-top: 3rem;
+  font-family: inherit;
+}
+
+.footer-band {
+  width: 100%;
+  padding: 18px 20px;
+  text-align: center;
+}
+
+.footer-casita {
+  background: #5a3518;
+  color: #ffffff;
+}
+
+.footer-menuria {
+  background: #050505;
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 18px;
+  flex-wrap: wrap;
+}
+
+.footer-title {
+  margin: 0;
+  font-weight: 700;
+}
+
+.footer-powered {
+  margin: 0;
+  font-size: 0.8rem;
+  opacity: 0.7;
+}
+
+.footer-link,
+.footer-links a {
+  color: #ffffff;
+  text-decoration: none;
+  font-size: 0.9rem;
+}
+
+.footer-link:hover,
+.footer-links a:hover {
+  text-decoration: underline;
+}
+
+.footer-menuria-brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.footer-logo {
+  width: 42px;
+  height: 42px;
+  object-fit: contain;
+  border-radius: 50%;
+}
+
+.footer-links {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  flex-wrap: wrap;
+}
+
+@media (max-width: 768px) {
+  .footer-menuria {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .footer-menuria-brand {
+    justify-content: center;
+  }
+}
