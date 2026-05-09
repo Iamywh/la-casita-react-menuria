@@ -335,6 +335,7 @@
 }
 
 .hero h1 {
+  line-height: 1.05;
   margin-bottom: 10px;
   color: #533411;
 }
@@ -426,6 +427,19 @@
 
   .google-review-btn {
     text-align: center;
+  }
+}
+
+@media (max-width: 600px) {
+  .hero h1 {
+    font-size: 2.4rem;
+    line-height: 1.08;
+    margin-bottom: 22px;
+  }
+
+  .hero p {
+    margin-top: 10px;
+    line-height: 1.45;
   }
 }
 
@@ -960,57 +974,44 @@
 
 @media (max-width: 600px) {
   .site-header {
-    left: 6px;
-    right: 6px;
-    top: 8px;
-
-    grid-template-columns: auto 1fr auto;
-    gap: 6px;
-
-    padding: 8px 8px;
-    border-radius: 14px;
+    grid-template-columns: auto minmax(0, 1fr) auto;
+    gap: 8px;
   }
 
   .header-center {
     min-width: 0;
-    gap: 6px;
+    overflow: hidden;
   }
 
-  .logo-circle {
-    width: 32px;
-    height: 32px;
-    font-size: 7px;
+  .header-logo {
+    width: 74px;
+    height: 74px;
     flex-shrink: 0;
   }
 
-  .header-center span,
-  .restaurant-title {
-    font-size: 0.95rem;
-    line-height: 1.05;
+  .header-center strong {
+    font-size: 1rem;
+    line-height: 1.15;
+    max-width: 115px;
     text-align: center;
-    max-width: 120px;
-    white-space: normal;
   }
 
-  .menu-btn {
-    padding: 10px 12px;
-    font-size: 0.95rem;
-    white-space: nowrap;
+  .header-lang {
+    flex-shrink: 0;
   }
 
   .visitor-badge {
-    padding: 9px 10px;
-    font-size: 0.85rem;
-    max-width: 58px;
-    overflow: hidden;
-    white-space: nowrap;
+    max-width: 54px;
+    min-width: 54px;
+    padding: 9px 8px;
   }
+}
 
   .visitor-badge .visitor-text,
   .visitor-badge span:first-child {
     display: none;
   }
-}
+
 
 .visitor-mobile {
   display: none;
@@ -1063,4 +1064,27 @@
   .visitor-mobile {
     display: inline;
   }
+}
+.manager-cakes-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: 12px;
+}
+
+.manager-cake-card {
+  border-radius: 14px;
+  padding: 14px;
+  border: 1px solid rgba(83, 52, 17, 0.18);
+}
+
+.cake-type-cake {
+  background: #fff4d6;
+}
+
+.cake-type-cookie {
+  background: #f3e2c7;
+}
+
+.cake-type-ny_cookie {
+  background: #e8f0ff;
 }

@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 import { supabase } from '../lib/supabaseClient'
 import { menuData } from '../data/menuData'
 import { translations } from '../data/translations'
@@ -13,41 +13,52 @@ function ManagerDashboard() {
   const [errorMsg, setErrorMsg] = useState('')
   const [menuItems, setMenuItems] = useState([])
   const [availability, setAvailability] = useState([])
+  const [openSection, setOpenSection] = useState('requests')
+  const [selectedRequestId, setSelectedRequestId] = useState(null)
   const [openMenuGroup, setOpenMenuGroup] = useState(null)
 
- const getAllMenuItems = () => {
-  return menuData.flatMap((menu) =>
-    (menu.categories || []).flatMap((category) => {
-      const items =
-        category.dynamic === 'cakes'
-          ? cakesData
-          : category.items || []
-
-const getLocalizedText = (value) => {
-  if (!value) return ''
-
-  if (typeof value === 'string') return value
-
-  if (typeof value === 'object') {
-    return value.es || value.en || value.it || ''
+  const t = (key) => {
+    return translations.es?.[key] || key
   }
 
-  return ''
-}
+  const getLocalizedText = (value) => {
+    if (!value) return ''
 
-      return items.map((item) => ({
-        id: item.id,
-        name: item.nameKey ? t(item.nameKey) : getLocalizedText(item.name) || item.id,
-        category: category.nameKey ? t(category.nameKey) : getLocalizedText(category.name) || category.id,
-        parent: menu.nameKey ? t(menu.nameKey) : getLocalizedText(menu.name) || menu.id,
-        isCake: category.dynamic === 'cakes'
-      }))
-    })
-  )
-}
-  const t = (key) => {
-  return translations.es?.[key] || key
-}
+    if (typeof value === 'string') return value
+
+    if (typeof value === 'object') {
+      return value.es || value.en || value.it || ''
+    }
+
+    return ''
+  }
+
+  const getCakeType = (item) => {
+    const rawType = item.type || item.categoryType || item.group || ''
+    const text = `${rawType} ${item.id || ''} ${getLocalizedText(item.name)} ${item.nameKey || ''}`.toLowerCase()
+
+    if (text.includes('ny') || text.includes('new york')) return 'ny_cookie'
+    if (text.includes('cookie')) return 'cookie'
+    return 'cake'
+  }
+
+  const getAllMenuItems = () => {
+    return menuData.flatMap((menu) =>
+      (menu.categories || []).flatMap((category) => {
+        const isCakeCategory = category.dynamic === 'cakes'
+        const items = isCakeCategory ? cakesData : category.items || []
+
+        return items.map((item) => ({
+          id: item.id,
+          name: item.nameKey ? t(item.nameKey) : getLocalizedText(item.name) || item.id,
+          category: category.nameKey ? t(category.nameKey) : getLocalizedText(category.name) || category.id,
+          parent: menu.nameKey ? t(menu.nameKey) : getLocalizedText(menu.name) || menu.id,
+          isCake: isCakeCategory,
+          cakeType: isCakeCategory ? getCakeType(item) : null
+        }))
+      })
+    )
+  }
 
   const fetchAvailability = async () => {
     const allItems = getAllMenuItems()
@@ -134,11 +145,28 @@ const getLocalizedText = (value) => {
 
     fetchAvailability()
   }
-const sortedMenuItems = [...menuItems].sort((a, b) => {
-  if (a.isCake && !b.isCake) return -1
-  if (!a.isCake && b.isCake) return 1
-  return 0
-})
+
+  const sortedMenuItems = useMemo(() => {
+    return [...menuItems].sort((a, b) => {
+      if (a.isCake && !b.isCake) return -1
+      if (!a.isCake && b.isCake) return 1
+      return a.name.localeCompare(b.name)
+    })
+  }, [menuItems])
+
+  const groupedMenuItems = useMemo(() => {
+    return sortedMenuItems.reduce((groups, item) => {
+      const key = item.isCake ? '🍰 Tartas, cookies y NY cookies' : item.parent || 'Sin categoría'
+
+      if (!groups[key]) {
+        groups[key] = []
+      }
+
+      groups[key].push(item)
+      return groups
+    }, {})
+  }, [sortedMenuItems])
+
   useEffect(() => {
     supabase.auth.getSession().then(({ data }) => {
       setSession(data.session)
@@ -177,10 +205,13 @@ const sortedMenuItems = [...menuItems].sort((a, b) => {
   const logout = async () => {
     await supabase.auth.signOut()
     setRequests([])
+    setMenuItems([])
+    setAvailability([])
   }
 
   const fetchRequests = async () => {
     setLoading(true)
+    setErrorMsg('')
 
     const { data, error } = await supabase
       .from('brunch_requests')
@@ -197,66 +228,94 @@ const sortedMenuItems = [...menuItems].sort((a, b) => {
     setLoading(false)
   }
 
+  const deleteTestRequests = async () => {
+    const confirmed = window.confirm(
+      '¿Eliminar solicitudes de prueba? Esto borrará reservas cuyo nombre, contacto o notas contengan "test" o "prueba".'
+    )
+
+    if (!confirmed) return
+
+    const { error } = await supabase
+      .from('brunch_requests')
+      .delete()
+      .or('name.ilike.%test%,name.ilike.%prueba%,contact.ilike.%test%,notes.ilike.%test%,notes.ilike.%prueba%')
+
+    if (error) {
+      console.error(error)
+      alert('Error eliminando solicitudes de prueba')
+      return
+    }
+
+    alert('Solicitudes de prueba eliminadas')
+    fetchRequests()
+  }
+
   const getStatusLabel = (status) => {
-  const labels = {
-    new: 'Nueva',
-    confirmed: 'Confirmada',
-    rejected: 'Rechazada'
+    const labels = {
+      new: 'Nueva',
+      confirmed: 'Confirmada',
+      rejected: 'Rechazada'
+    }
+
+    return labels[status] || status
   }
 
-  return labels[status] || status
-}
+  const getChoiceLabel = (choice) => {
+    const map = {
+      op1_a: 'Tosta con queso crema, crema de aguacate y huevo frito',
+      op1_b: 'Revuelto de setas',
+      op2_a: 'Tosta con rúcula, queso Manchego, huevo frito y aceite de albahaca',
+      op2_b: 'Pata asada con pimiento de piquillo y mahonesa de pimentón',
+      op3_a: 'Ternera salteada en salsa teriyaki',
+      op3_b: 'Pisto de verduras con huevo pochado'
+    }
 
-const getChoiceLabel = (choice) => {
-  const map = {
-    op1_a: 'Tosta con queso crema, crema de aguacate y huevo frito',
-    op1_b: 'Revuelto de setas',
-    op2_a: 'Tosta con rúcula, queso Manchego, huevo frito y aceite de albahaca',
-    op2_b: 'Pata asada con pimiento de piquillo y mahonesa de pimentón',
-    op3_a: 'Ternera salteada en salsa teriyaki',
-    op3_b: 'Pisto de verduras con huevo pochado'
+    return map[choice] || choice || 'Sin selección'
   }
 
-  return map[choice] || choice || 'Sin selección'
-}
+  const getOptionLabel = (option) => {
+    const map = {
+      opcion_1: 'Opción 1',
+      opcion_2: 'Opción 2',
+      opcion_3: 'Opción 3'
+    }
 
-const getOptionLabel = (option) => {
-  const map = {
-    opcion_1: 'Opción 1',
-    opcion_2: 'Opción 2',
-    opcion_3: 'Opción 3'
+    return map[option] || option || 'Sin opción'
   }
 
-  return map[option] || option || 'Sin opción'
-}
-const updateStatus = async (id, status) => {
-  const { error } = await supabase
-    .from('brunch_requests')
-    .update({ status })
-    .eq('id', id)
+  const updateStatus = async (id, status) => {
+    const { error } = await supabase
+      .from('brunch_requests')
+      .update({ status })
+      .eq('id', id)
 
-  if (error) {
-    console.error(error)
-    alert('Error al actualizar el estado')
-    return false
+    if (error) {
+      console.error(error)
+      alert('Error al actualizar el estado')
+      return false
+    }
+
+    fetchRequests()
+    return true
   }
 
-  fetchRequests()
-  return true
-}
-const contactClient = (req) => {
-  console.log('Reserva seleccionada:', req)
+  const getSelectionsText = (req) => {
+    if (!Array.isArray(req.brunch_selections) || req.brunch_selections.length === 0) {
+      return 'No se registraron selecciones de brunch.'
+    }
 
-  const selectionsText = Array.isArray(req.brunch_selections) && req.brunch_selections.length > 0
-    ? req.brunch_selections
-        .map(
-          (s, i) =>
-            `Persona ${i + 1}: ${getOptionLabel(s.option)} - ${getChoiceLabel(s.choice)}`
-        )
-        .join('\n')
-    : 'No se registraron selecciones de brunch.'
+    return req.brunch_selections
+      .map(
+        (selection, index) =>
+          `Persona ${index + 1}: ${getOptionLabel(selection.option)} - ${getChoiceLabel(selection.choice)}`
+      )
+      .join('\n')
+  }
 
- const message = `Hola ${req.name},
+  const contactClient = (req) => {
+    const selectionsText = getSelectionsText(req)
+
+    const message = `Hola ${req.name},
 
 Confirmamos tu reserva de brunch:
 
@@ -270,30 +329,115 @@ ${selectionsText}
 Gracias,
 La Casita`
 
-  const subject = encodeURIComponent('Reserva de brunch confirmada')
-  const body = encodeURIComponent(message)
+    if (req.contact.includes('@')) {
+      const params = new URLSearchParams({
+        view: 'cm',
+        fs: '1',
+        to: req.contact,
+        su: 'Reserva de brunch confirmada',
+        body: message
+      })
 
-  if (req.contact.includes('@')) {
-  const params = new URLSearchParams({
-    view: 'cm',
-    fs: '1',
-    to: req.contact,
-    su: 'Reserva de brunch confirmada',
-    body: message
-  })
+      window.open(`https://mail.google.com/mail/?${params.toString()}`, '_blank')
+      return
+    }
 
-  window.open(
-    `https://mail.google.com/mail/?${params.toString()}`,
-    '_blank'
-  )
+    const cleanPhone = req.contact.replace(/\D/g, '')
+    const whatsappMessage = encodeURIComponent(message)
+    window.open(`https://wa.me/${cleanPhone}?text=${whatsappMessage}`, '_blank')
+  }
 
-  return
-}
+  const renderRequestDetail = (req) => {
+    return (
+      <div className="manager-request-detail">
+        <p><strong>Contacto:</strong> {req.contact}</p>
+        <p><strong>Fecha:</strong> {req.request_date}</p>
+        <p><strong>Hora:</strong> {req.request_time}</p>
+        <p><strong>Personas:</strong> {req.people}</p>
+        <p><strong>Notas:</strong> {req.notes || '—'}</p>
 
-  const cleanPhone = req.contact.replace(/\D/g, '')
-  const whatsappMessage = encodeURIComponent(message)
-  window.open(`https://wa.me/${cleanPhone}?text=${whatsappMessage}`, '_blank')
-}
+        {req.brunch_selections?.length > 0 && (
+          <div className="brunch-selections-box">
+            <p><strong>Opciones brunch:</strong></p>
+
+            {req.brunch_selections.map((selection, index) => (
+              <p key={`${req.id}-selection-${index}`}>
+                Persona {index + 1}: {getOptionLabel(selection.option)} / {getChoiceLabel(selection.choice)}
+              </p>
+            ))}
+          </div>
+        )}
+
+        <p>
+          <strong>Estado:</strong>{' '}
+          <span className={`status-badge status-${req.status}`}>
+            {getStatusLabel(req.status)}
+          </span>
+        </p>
+
+        <div className="manager-actions">
+          <button
+            className="confirm-btn"
+            type="button"
+            onClick={async () => {
+              const updated = await updateStatus(req.id, 'confirmed')
+
+              if (updated) {
+                contactClient(req)
+              }
+            }}
+          >
+            Confirmar y contactar
+          </button>
+
+          <button
+            className="reject-btn"
+            type="button"
+            onClick={() => updateStatus(req.id, 'rejected')}
+          >
+            Rechazar
+          </button>
+
+          <button
+            className="new-btn"
+            type="button"
+            onClick={() => updateStatus(req.id, 'new')}
+          >
+            Nueva
+          </button>
+        </div>
+      </div>
+    )
+  }
+
+  const renderMenuItemCard = (item) => {
+    const available = isItemAvailable(item.id)
+    const cakeClass = item.isCake ? `manager-cake-card cake-type-${item.cakeType || 'cake'}` : 'manager-card'
+
+    return (
+      <div className={cakeClass} key={item.id}>
+        <h3>{item.name}</h3>
+        <p><strong>Sección:</strong> {item.category}</p>
+
+        {item.isCake && (
+          <p className="cake-type-label">
+            {item.cakeType === 'cookie' && '🍪 Cookie'}
+            {item.cakeType === 'ny_cookie' && '🍪 NY Cookie'}
+            {item.cakeType === 'cake' && '🍰 Tarta'}
+          </p>
+        )}
+
+        <button
+          type="button"
+          onClick={() => toggleAvailability(item.id)}
+          className={available ? 'available-btn' : 'unavailable-btn'}
+        >
+          {available ? 'Disponible' : 'No disponible'}
+        </button>
+      </div>
+    )
+  }
+
   if (!session) {
     return (
       <section className="manager-page">
@@ -327,124 +471,104 @@ La Casita`
   return (
     <section className="manager-page">
       <div className="manager-header">
-        <h1>Solicitudes de brunch</h1>
-        <button onClick={logout}>Cerrar sesión</button>
+        <h1>Panel de gestión</h1>
+        <button type="button" onClick={logout}>Cerrar sesión</button>
       </div>
 
-      {loading && <p>Cargando...</p>}
+      {errorMsg && <p className="manager-error">{errorMsg}</p>}
 
-      <div className="manager-list">
-        {requests.map((req) => (
-          <div className="manager-card" key={req.id}>
-            <h3>{req.name}</h3>
-
-            <p><strong>Contacto:</strong> {req.contact}</p>
-            <p><strong>Fecha:</strong> {req.request_date}</p>
-            <p><strong>Hora:</strong> {req.request_time}</p>
-            <p><strong>Personas:</strong> {req.people}</p>
-            <p><strong>Notas:</strong> {req.notes || '—'}</p>
-            {req.brunch_selections?.length > 0 && (
-  <div className="brunch-selections-box">
-    <p><strong>Opciones brunch:</strong></p>
-
-    {req.brunch_selections.map((selection, index) => (
-      <p key={index}>
-        Persona {index + 1}:{' '}
-        {selection.option || '—'} / {selection.choice || '—'}
-      </p>
-    ))}
-  </div>
-)}
-            <p>
-  <strong>Estado:</strong>{' '}
-  <span className={`status-badge status-${req.status}`}>
-    {getStatusLabel(req.status)}
-  </span>
-</p>
-
-            <div className="manager-actions">
-              <button
-  className="confirm-btn"
-  onClick={async () => {
-    const updated = await updateStatus(req.id, 'confirmed')
-
-    if (updated) {
-      contactClient(req)
-    }
-  }}
->
-  Confirmar
-</button>
-
-                <button
-                className="reject-btn"
-                onClick={() => updateStatus(req.id, 'rejected')}
-                >
-                Rechazar
-                </button>
-
-                <button
-                className="new-btn"
-                onClick={() => updateStatus(req.id, 'new')}
-                >
-                Nueva
-                </button>
-            </div>
-          </div>
-        ))}
-      </div>
-
-     <div className="manager-section">
-  <div className="manager-header">
-    <h2>Disponibilidad del menú</h2>
-    <button onClick={syncMenuAvailability}>Sincronizar menú</button>
-  </div>
-
-  {Object.entries(
-    sortedMenuItems.reduce((groups, item) => {
-      const key = item.isCake ? '🍰 Tartas del día' : item.parent || 'Sin categoría'
-
-      if (!groups[key]) {
-        groups[key] = []
-      }
-
-      groups[key].push(item)
-      return groups
-    }, {})
-  ).map(([parentName, items]) => (
-    <div className="manager-menu-group" key={parentName}>
-      <button
-  className="manager-menu-group-title"
-  type="button"
-  onClick={() =>
-    setOpenMenuGroup((prev) => (prev === parentName ? null : parentName))
-  }
->
-  {parentName} {openMenuGroup === parentName ? '▲' : '▼'}
-</button>
-
-      {openMenuGroup === parentName && (
-  <div className="manager-list">
-    {items.map((item) => (
-      <div className="manager-card" key={item.id}>
-        <h3>{item.name}</h3>
-        <p><strong>Sección:</strong> {item.category}</p>
-        
-
+      <div className="manager-section">
         <button
-          onClick={() => toggleAvailability(item.id)}
-          className={isItemAvailable(item.id) ? 'available-btn' : 'unavailable-btn'}
+          className="manager-menu-group-title"
+          type="button"
+          onClick={() => setOpenSection(openSection === 'requests' ? null : 'requests')}
         >
-          {isItemAvailable(item.id) ? 'Disponible' : 'No disponible'}
+          📅 Reservas de brunch {openSection === 'requests' ? '▲' : '▼'}
         </button>
+
+        {openSection === 'requests' && (
+          <>
+            <div className="manager-header manager-subheader">
+              <h2>Solicitudes</h2>
+              <div className="manager-actions">
+                <button type="button" onClick={fetchRequests}>Actualizar</button>
+                <button type="button" className="reject-btn" onClick={deleteTestRequests}>
+                  Limpiar pruebas
+                </button>
+              </div>
+            </div>
+
+            {loading && <p>Cargando...</p>}
+
+            <div className="manager-list">
+              {requests.length === 0 && !loading && (
+                <p>No hay solicitudes de brunch.</p>
+              )}
+
+              {requests.map((req) => (
+                <div className="manager-card" key={req.id}>
+                  <button
+                    type="button"
+                    className="manager-request-summary"
+                    onClick={() =>
+                      setSelectedRequestId((prev) => (prev === req.id ? null : req.id))
+                    }
+                  >
+                    <span>
+                      <strong>{req.name}</strong> · {req.request_date} · {req.request_time} · {req.people} pax
+                    </span>
+
+                    <span className={`status-badge status-${req.status}`}>
+                      {getStatusLabel(req.status)}
+                    </span>
+                  </button>
+
+                  {selectedRequestId === req.id && renderRequestDetail(req)}
+                </div>
+              ))}
+            </div>
+          </>
+        )}
       </div>
-    ))}
-  </div>
-)}
-    </div>
-    
-  ))}
-</div>
+
+      <div className="manager-section">
+        <button
+          className="manager-menu-group-title"
+          type="button"
+          onClick={() => setOpenSection(openSection === 'availability' ? null : 'availability')}
+        >
+          🍽️ Disponibilidad del menú {openSection === 'availability' ? '▲' : '▼'}
+        </button>
+
+        {openSection === 'availability' && (
+          <>
+            <div className="manager-header manager-subheader">
+              <h2>Platos y productos</h2>
+              <button type="button" onClick={syncMenuAvailability}>Sincronizar menú</button>
+            </div>
+
+            {Object.entries(groupedMenuItems).map(([parentName, items]) => (
+              <div className="manager-menu-group" key={parentName}>
+                <button
+                  className="manager-menu-group-title manager-menu-group-subtitle"
+                  type="button"
+                  onClick={() =>
+                    setOpenMenuGroup((prev) => (prev === parentName ? null : parentName))
+                  }
+                >
+                  {parentName} {openMenuGroup === parentName ? '▲' : '▼'}
+                </button>
+
+                {openMenuGroup === parentName && (
+                  <div className={parentName.includes('Tartas') ? 'manager-cakes-grid' : 'manager-list'}>
+                    {items.map(renderMenuItemCard)}
+                  </div>
+                )}
+              </div>
+            ))}
+          </>
+        )}
+      </div>
     </section>
   )
 }
