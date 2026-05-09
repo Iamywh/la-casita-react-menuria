@@ -980,7 +980,7 @@
 
   .header-center {
     min-width: 0;
-    overflow: hidden;
+    gap: 8px;
   }
 
   .header-logo {
@@ -1023,38 +1023,45 @@
   }
 }
 
+.visitor-mobile {
+  display: none;
+}
+
+.visitor-label {
+  display: inline;
+}
+
 @media (max-width: 600px) {
   .site-header {
-    left: 6px;
-    right: 6px;
-    top: 8px;
     grid-template-columns: auto 1fr auto;
-    gap: 6px;
-    padding: 8px;
+    gap: 10px;
+    padding: 10px 12px;
+  }
+
+  .header-logo {
+    width: 72px;
+    height: 72px;
+    flex-shrink: 0;
   }
 
   .header-center {
+    gap: 8px;
     min-width: 0;
-    gap: 6px;
   }
 
   .header-center strong {
     font-size: 0.95rem;
-    line-height: 1.05;
-    max-width: 120px;
+    line-height: 1.1;
     text-align: center;
   }
 
-  .menu-btn {
-    padding: 10px 12px;
-    font-size: 0.95rem;
-    white-space: nowrap;
+  .header-lang-btn {
+    padding: 6px 8px;
   }
 
   .visitor-badge {
-    padding: 9px 10px;
-    font-size: 0.85rem;
-    white-space: nowrap;
+    min-width: 54px;
+    padding: 8px 10px;
   }
 
   .visitor-label {
@@ -1064,7 +1071,7 @@
   .visitor-mobile {
     display: inline;
   }
-}
+}s
 .manager-cakes-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
