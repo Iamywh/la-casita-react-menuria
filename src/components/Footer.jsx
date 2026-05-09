@@ -1,43 +1,57 @@
+import './Footer.css'
+
 function Footer() {
   return (
     <footer className="site-footer">
+      {/* La Casita */}
       <section className="footer-band footer-casita">
-        <p className="footer-title">La Casita del Nazareno</p>
+        <div className="footer-brand">
+          <img
+            src="/images/icons/logo.png"
+            alt="La Casita logo"
+            className="footer-logo"
+          />
+          <p className="footer-title">La Casita del Nazareno</p>
+        </div>
 
-        <a
-          href="https://www.instagram.com/lacasitasc_/"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="footer-link"
-        >
-          📸 Síguenos en Instagram
-        </a>
+        <div className="footer-social-center">
+          <p className="footer-small-title">Síguenos en las redes</p>
+          <a
+            href="https://www.instagram.com/lacasitasc_/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="footer-link"
+          >
+            📸 Instagram
+          </a>
+        </div>
       </section>
 
+      {/* Menuria */}
       <section className="footer-band footer-menuria">
-        <div className="footer-menuria-brand">
+        <div className="footer-brand">
           <img
-            src="/assets/img/logo.jpg"
+            src="/images/icons/logo.jpg"
             alt="Menuria logo"
             className="footer-logo"
           />
-
           <div>
             <p className="footer-powered">Powered by</p>
-            <p className="footer-title">Menuria</p>
+            <p className="footer-title">Menuria Solutions</p>
           </div>
         </div>
 
-        <div className="footer-links">
-          <a href="https://menuria-solutions.netlify.app/" target="_blank" rel="noopener noreferrer">
-            🌐 Website
-          </a>
-
-          <a href="https://www.instagram.com/menuriasolutionssl/" target="_blank" rel="noopener noreferrer">
+        <div className="footer-social-center">
+          <a
+            href="https://www.instagram.com/menuriasolutionssl/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="footer-link"
+          >
             📸 Instagram
           </a>
 
-          <a href="mailto:menuriasolutions@gmail.com">
+          <a href="mailto:menuriasolutions@gmail.com" className="footer-link">
             ✉️ menuriasolutions@gmail.com
           </a>
         </div>

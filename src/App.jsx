@@ -54,7 +54,7 @@ const changeLang = (newLang) => {
         <Route path="/locale" element={<LocalSection lang={lang} changeLang={changeLang} />} />
         <Route path="/manager" element={<ManagerDashboard />} />
       </Routes>
-      {/* <Footer lang={lang} /> */}
+      <Footer lang={lang} /> 
     </div>
   )
 }
