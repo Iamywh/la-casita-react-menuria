@@ -193,6 +193,33 @@ export const cakesData = [
   allergens: ['cereales', 'huevos', 'leche', 'frutos secos']
 },
 {
+  id: 'polvito-uruguayo',
+  name: {
+    es: 'Polvito Uruguayo',
+    en: 'Uruguayan Crumble Dessert',
+    it: 'Polvito Uruguaiano',
+    fr: 'Polvito Uruguayen',
+    de: 'Uruguayisches Polvito',
+    pt: 'Polvito Uruguaio',
+    ru: 'Уругвайский Польвито'
+  },
+  description: {
+    es: 'Base de galleta crujiente, dulce de leche, nata montada dulce y merengue desmenuzado',
+    en: 'Crunchy biscuit base, dulce de leche, sweet whipped cream and crushed meringue',
+    it: 'Base croccante di biscotto, dulce de leche, panna montata dolce e meringa sbriciolata',
+    fr: 'Base biscuit croustillante, dulce de leche, crème fouettée sucrée et meringue émiettée',
+    de: 'Knuspriger Keksboden, Dulce de Leche, süße Schlagsahne und zerbröselte Baiser',
+    pt: 'Base crocante de bolacha, doce de leite, chantilly doce e merengue triturado',
+    ru: 'Хрустящая основа из печенья, дульсе де лече, сладкие взбитые сливки и крошка безе'
+  },
+
+  image: '/images/dishes/polvito-uruguayo.jpeg',
+
+  price: '4.80€',
+  available: true,
+  allergens: ['cereales', 'huevos', 'leche']
+},
+{
   id: 'tarta-choco-frambuesa',
   name: {
     es: 'Tarta Choco Frambuesa',
@@ -236,6 +263,8 @@ export const cakesData = [
     pt: 'Bolo de chocolate e café, creme de queijo e café',
     ru: 'Бисквит с шоколадом и кофе, сливочный сыр и кофе'
   },
+
+  image: '/images/dishes/mocha-cake.jpeg',
   price: '4.80€',
   available: true,
   allergens: ['cereales', 'huevos', 'leche']
