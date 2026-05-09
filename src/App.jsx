@@ -9,6 +9,7 @@ import MenuList from './components/menuList'
 import AllergenGrid from './components/AllergenGrid'
 import LocalSection from './components/LocalSection'
 import ManagerDashboard from './pages/ManagerDashboard'
+import Footer from './components/Footer'
 
 
 function HomePage({ lang, changeLang }) {
@@ -53,6 +54,7 @@ const changeLang = (newLang) => {
         <Route path="/locale" element={<LocalSection lang={lang} changeLang={changeLang} />} />
         <Route path="/manager" element={<ManagerDashboard />} />
       </Routes>
+      <footer lang={lang} />
     </div>
   )
 }
