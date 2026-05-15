@@ -744,7 +744,7 @@ export const cakesData = [
     pt: 'Cookie com chocolate branco, amêndoas e mel, recheado com chocolate branco',
     ru: 'Печенье с белым шоколадом, миндалём и мёдом, с начинкой из белого шоколада'
   },
-  image: '/images/dishes/ny-almendras.jpg',
+  image: '/images/dishes/ny-almendra.jpg',
   price: '4.20€',
   available: true,
   allergens: ['cereales', 'huevos', 'leche', 'frutos_secos']
