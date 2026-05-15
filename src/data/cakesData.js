@@ -671,7 +671,7 @@ export const cakesData = [
   },
   image: '/images/dishes/ny-kinder.jpg',
   price: '4.20€',
-  available: false,
+  available: true,
   allergens: ['cereales', 'huevos', 'leche', 'frutos_secos']
 },
 {
@@ -696,7 +696,7 @@ export const cakesData = [
   },
   image: '/images/dishes/ny-matcha.jpg',
   price: '4.20€',
-  available: false,
+  available: true,
   allergens: ['cereales', 'huevos', 'leche']
 },
 {
@@ -721,7 +721,7 @@ export const cakesData = [
   },
   image: '/images/dishes/ny-oreo.jpg',
   price: '4.20€',
-  available: false,
+  available: true,
   allergens: ['cereales', 'huevos', 'leche']
 },
 {
@@ -746,7 +746,7 @@ export const cakesData = [
   },
   image: '/images/dishes/ny-almendras.jpg',
   price: '4.20€',
-  available: false,
+  available: true,
   allergens: ['cereales', 'huevos', 'leche', 'frutos_secos']
 },
 {
@@ -771,7 +771,7 @@ export const cakesData = [
   },
   image: '/images/dishes/ny-passion.jpg',
   price: '4.20€',
-  available: false,
+  available: true,
   allergens: ['cereales', 'huevos', 'leche']
 },
 {
@@ -796,7 +796,7 @@ export const cakesData = [
   },
   image: '/images/dishes/ny-red-velvet.jpg',
   price: '4.20€',
-  available: false,
+  available: true,
   allergens: ['cereales', 'huevos', 'leche']
 },
 {
@@ -821,7 +821,7 @@ export const cakesData = [
   },
   image: '/images/dishes/ny-lotus.jpg',
   price: '4.20€',
-  available: false,
+  available: true,
   allergens: ['cereales', 'huevos', 'leche']
 },
 {
