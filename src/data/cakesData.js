@@ -19,6 +19,7 @@ export const cakesData = [
     pt: 'Base de bolacha, creme de limão, merengue tostado',
     ru: 'Основа из печенья, лимонный крем, подрумяненная меренга'
   },
+  image: '/images/dishes/maria-victoria.jpg',
   price: '5.00€',
   available: true,
   badgeKeys: ['badge_fresh'],
@@ -68,6 +69,7 @@ export const cakesData = [
     pt: 'Bolo de Baileys, creme de queijo, chocolate e café',
     ru: 'Бисквит с Baileys, сливочный сыр, шоколад и кофе'
   },
+  image: '/images/dishes/bayleis.jpg',
   price: '4.50€',
   available: true,
   allergens: ['cereales', 'huevos', 'leche']
@@ -92,6 +94,7 @@ export const cakesData = [
     pt: 'Bolo de chocolate, creme de queijo e chocolate branco, chocolate preto',
     ru: 'Шоколадный бисквит, сливочный сыр с белым шоколадом, тёмный шоколад'
   },
+  image: '/images/dishes/choco-velvet.jpg',
   price: '4.80€',
   available: true,
   allergens: ['cereales', 'huevos', 'leche']
@@ -116,6 +119,7 @@ export const cakesData = [
     pt: 'Bolo de chocolate e mirtilos, creme de queijo e chocolate branco, chocolate preto',
     ru: 'Бисквит с шоколадом и черникой, сливочный сыр с белым шоколадом, тёмный шоколад'
   },
+  image: '/images/dishes/blue-velvet.jpg',
   price: '4.80€',
   available: true,
   allergens: ['cereales', 'huevos', 'leche']
@@ -164,6 +168,7 @@ export const cakesData = [
     pt: 'Bolo de cenoura e nozes, creme de queijo e baunilha',
     ru: 'Бисквит с морковью и грецкими орехами, сливочный сыр и ваниль'
   },
+  image: '/images/dishes/tarta-zanahoria.jpg',
   price: '4.80€',
   available: true,
   allergens: ['cereales', 'huevos', 'leche', 'frutos secos']
@@ -188,6 +193,7 @@ export const cakesData = [
     pt: 'Bolo de abóbora e nozes, creme de queijo e baunilha',
     ru: 'Бисквит с тыквой и грецкими орехами, сливочный сыр и ваниль'
   },
+  image: '/images/dishes/tarta-calabaza.jpg',
   price: '4.80€',
   available: true,
   allergens: ['cereales', 'huevos', 'leche', 'frutos secos']
@@ -270,6 +276,31 @@ export const cakesData = [
   allergens: ['cereales', 'huevos', 'leche']
 },
 {
+  id: 'tarta-canela-manzana',
+  name: {
+    es: 'Tarta de Canela y Manzana',
+    en: 'Cinnamon Apple Cake',
+    it: 'Torta alla Cannella e Mele',
+    fr: 'Gâteau cannelle et pomme',
+    de: 'Zimt-Apfel-Kuchen',
+    pt: 'Bolo de canela e maçã',
+    ru: 'Яблочный пирог с корицей'
+  },
+  description: {
+    es: 'Bizcocho de manzana con canela y crema suave',
+    en: 'Apple sponge cake with cinnamon and smooth cream',
+    it: 'Pan di Spagna alle mele con cannella e crema morbida',
+    fr: 'Génoise à la pomme avec cannelle et crème douce',
+    de: 'Apfelbiskuit mit Zimt und feiner Creme',
+    pt: 'Bolo de maçã com canela e creme suave',
+    ru: 'Яблочный бисквит с корицей и нежным кремом'
+  },
+  image: '/images/dishes/mocha-cake.jpeg',
+  price: '4.80€',
+  available: true,
+  allergens: ['cereales', 'huevos', 'leche']
+},
+{
   id: 'tarta-pistacho',
   name: {
     es: 'Tarta Pistacho',
@@ -289,6 +320,7 @@ export const cakesData = [
     pt: 'Bolo de pistacho, creme de queijo e pistacho, chocolate branco',
     ru: 'Бисквит с фисташкой, сливочный сыр и фисташка, белый шоколад'
   },
+  image: '/images/dishes/tarta-pistacho.jpg',
   price: '4.80€',
   available: true,
   allergens: ['cereales', 'huevos', 'leche', 'frutos_secos'] // ⚠️ importante
@@ -337,6 +369,7 @@ export const cakesData = [
     pt: 'Bolo de ananás, banana e nozes, creme de queijo e coco, coco ralado',
     ru: 'Бисквит с ананасом, бананом и грецкими орехами, сливочный сыр и кокос, кокосовая стружка'
   },
+  image: '/images/dishes/colibri.jpg',
   price: '4.80€',
   available: true,
   allergens: ['cereales', 'huevos', 'leche', 'frutos_secos']
@@ -361,6 +394,7 @@ export const cakesData = [
     pt: 'Bolo de baunilha, claras de ovo, açúcar',
     ru: 'Ванильный бисквит, яичные белки, сахар'
   },
+  image: '/images/dishes/angel-food.jpg',
   price: '4.50€',
   available: true,
   allergens: ['cereales', 'huevos']
@@ -385,6 +419,7 @@ export const cakesData = [
     pt: 'Cheesecake, bola de gelado de baunilha, xarope de morango opcional',
     ru: 'Чизкейк, шарик ванильного мороженого, клубничный сироп по желанию'
   },
+  image: '/images/dishes/cheescake.jpg',
   price: '4.80€',
   available: true,
   allergens: ['cereales', 'huevos', 'leche']
@@ -409,6 +444,7 @@ export const cakesData = [
     pt: 'Rolo doce e fofo com canela e açúcar, coberto com glacê',
     ru: 'Мягкая сладкая булочка с корицей и сахаром, покрытая глазурью'
   },
+  image: '/images/dishes/rollito-canela.jpg',
   price: '4.50€',
   available: true,
   allergens: ['cereales', 'huevos', 'leche']
@@ -433,6 +469,7 @@ export const cakesData = [
     pt: 'Cookie de chocolate 70% com gotas de chocolate',
     ru: 'Шоколадное печенье 70% с шоколадными каплями'
   },
+  image: '/images/dishes/cookie-choco-70.jpg',
   price: '3.00€',
   available: true,
   allergens: ['cereales', 'huevos', 'leche']
@@ -457,6 +494,7 @@ export const cakesData = [
     pt: 'Cookie de pistacho',
     ru: 'Фисташковое печенье'
   },
+  image: '/images/dishes/cookie-pistacho.jpg',
   price: '3.00€',
   available: true,
   allergens: ['cereales', 'huevos', 'leche', 'frutos_secos']
@@ -481,6 +519,7 @@ export const cakesData = [
     pt: 'Cookie de chocolate Red Velvet com gotas de chocolate',
     ru: 'Печенье Red Velvet с шоколадными каплями'
   },
+  image: '/images/dishes/cookie-red-velvet.jpg',
   price: '3.00€',
   available: true,
   allergens: ['cereales', 'huevos', 'leche']
@@ -505,6 +544,7 @@ export const cakesData = [
     pt: 'Cookie de banana com aveia e gotas de chocolate',
     ru: 'Печенье с бананом, овсом и шоколадными каплями'
   },
+  image: '/images/dishes/cookie-platano.jpg',
   price: '3.00€',
   available: true,
   allergens: ['cereales', 'huevos', 'leche']
@@ -529,6 +569,7 @@ export const cakesData = [
     pt: 'Cookie com gotas de chocolate, recheado com Nutella',
     ru: 'Печенье с шоколадными каплями, с начинкой Nutella'
   },
+  image: '/images/dishes/ny-nutella.jpg',
   price: '4.20€',
   available: true,
   allergens: ['cereales', 'huevos', 'leche', 'frutos_secos']
@@ -553,6 +594,7 @@ export const cakesData = [
     pt: 'Cookie com doce de mirtilos, recheado com chocolate branco',
     ru: 'Печенье с черничным джемом, с начинкой из белого шоколада'
   },
+  image: '/images/dishes/ny-arandano.jpg',
   price: '4.20€',
   available: true,
   allergens: ['cereales', 'huevos', 'leche']
@@ -577,6 +619,7 @@ export const cakesData = [
     pt: 'Cookie com pedaços de Ferrero Rocher, recheado com creme de chocolate',
     ru: 'Печенье с кусочками Ferrero Rocher, с шоколадной кремовой начинкой'
   },
+  image: '/images/dishes/ny-ferrero.jpg',
   price: '4.20€',
   available: true,
   allergens: ['cereales', 'huevos', 'leche', 'frutos_secos']
@@ -601,6 +644,7 @@ export const cakesData = [
     pt: 'Cookie coberto com chocolate, recheado com creme de coco',
     ru: 'Печенье в шоколадной глазури, с кокосовой кремовой начинкой'
   },
+  image: '/images/dishes/ny-bounty.jpg',
   price: '4.20€',
   available: true,
   allergens: ['cereales', 'huevos', 'leche']
@@ -625,9 +669,160 @@ export const cakesData = [
     pt: 'Cookie com pedaços de Kinder Bueno, recheado com creme de chocolate',
     ru: 'Печенье с кусочками Kinder Bueno, с шоколадной кремовой начинкой'
   },
+  image: '/images/dishes/ny-kinder.jpg',
   price: '4.20€',
   available: false,
   allergens: ['cereales', 'huevos', 'leche', 'frutos_secos']
+},
+{
+  id: 'new-york-cookie-matcha',
+  name: {
+    es: 'New York Cookie de Matcha',
+    en: 'Matcha New York Cookie',
+    it: 'New York Cookie al Matcha',
+    fr: 'New York Cookie au matcha',
+    de: 'New York Cookie mit Matcha',
+    pt: 'New York Cookie de matcha',
+    ru: 'New York Cookie с матча'
+  },
+  description: {
+    es: 'Galleta de matcha con relleno de chocolate blanco',
+    en: 'Matcha cookie filled with white chocolate',
+    it: 'Cookie al matcha con ripieno di cioccolato bianco',
+    fr: 'Cookie au matcha fourré au chocolat blanc',
+    de: 'Matcha-Cookie mit weißer Schokoladenfüllung',
+    pt: 'Cookie de matcha recheado com chocolate branco',
+    ru: 'Печенье с матча и начинкой из белого шоколада'
+  },
+  image: '/images/dishes/ny-matcha.jpg',
+  price: '4.20€',
+  available: false,
+  allergens: ['cereales', 'huevos', 'leche']
+},
+{
+  id: 'new-york-cookie-oreo',
+  name: {
+    es: 'New York Cookie de Oreo',
+    en: 'Oreo New York Cookie',
+    it: 'New York Cookie all’Oreo',
+    fr: 'New York Cookie Oreo',
+    de: 'New York Cookie mit Oreo',
+    pt: 'New York Cookie de Oreo',
+    ru: 'New York Cookie с Oreo'
+  },
+  description: {
+    es: 'Galleta estilo New York Cookie con relleno de Oreo',
+    en: 'New York style cookie filled with Oreo cream',
+    it: 'Cookie stile New York con ripieno di Oreo',
+    fr: 'Cookie style New York fourré à l’Oreo',
+    de: 'New-York-Cookie mit Oreo-Füllung',
+    pt: 'Cookie estilo New York recheado com Oreo',
+    ru: 'Печенье в стиле New York с начинкой Oreo'
+  },
+  image: '/images/dishes/ny-oreo.jpg',
+  price: '4.20€',
+  available: false,
+  allergens: ['cereales', 'huevos', 'leche']
+},
+{
+  id: 'new-york-cookie-almendras-miel',
+  name: {
+    es: 'New York Cookie de Chocolate Blanco, Almendras y Miel',
+    en: 'White Chocolate, Almond and Honey New York Cookie',
+    it: 'New York Cookie al Cioccolato Bianco, Mandorle e Miele',
+    fr: 'New York Cookie chocolat blanc, amandes et miel',
+    de: 'New York Cookie mit weißer Schokolade, Mandeln und Honig',
+    pt: 'New York Cookie de chocolate branco, amêndoas e mel',
+    ru: 'New York Cookie с белым шоколадом, миндалём и мёдом'
+  },
+  description: {
+    es: 'Galleta con chocolate blanco, almendras y miel, rellena de chocolate blanco',
+    en: 'Cookie with white chocolate, almonds and honey, filled with white chocolate',
+    it: 'Cookie con cioccolato bianco, mandorle e miele, ripieno di cioccolato bianco',
+    fr: 'Cookie avec chocolat blanc, amandes et miel, fourré au chocolat blanc',
+    de: 'Cookie mit weißer Schokolade, Mandeln und Honig, gefüllt mit weißer Schokolade',
+    pt: 'Cookie com chocolate branco, amêndoas e mel, recheado com chocolate branco',
+    ru: 'Печенье с белым шоколадом, миндалём и мёдом, с начинкой из белого шоколада'
+  },
+  image: '/images/dishes/ny-almendras.jpg',
+  price: '4.20€',
+  available: false,
+  allergens: ['cereales', 'huevos', 'leche', 'frutos_secos']
+},
+{
+  id: 'new-york-cookie-passion-fruit',
+  name: {
+    es: 'New York Cookie de Maracuyá y Chocolate Blanco',
+    en: 'Passion Fruit and White Chocolate New York Cookie',
+    it: 'New York Cookie al Passion Fruit e Cioccolato Bianco',
+    fr: 'New York Cookie fruit de la passion et chocolat blanc',
+    de: 'New York Cookie mit Passionsfrucht und weißer Schokolade',
+    pt: 'New York Cookie de maracujá e chocolate branco',
+    ru: 'New York Cookie с маракуйей и белым шоколадом'
+  },
+  description: {
+    es: 'Galleta con maracuyá y chocolate blanco, rellena de chocolate blanco',
+    en: 'Cookie with passion fruit and white chocolate, filled with white chocolate',
+    it: 'Cookie con passion fruit e cioccolato bianco, ripieno di cioccolato bianco',
+    fr: 'Cookie avec fruit de la passion et chocolat blanc, fourré au chocolat blanc',
+    de: 'Cookie mit Passionsfrucht und weißer Schokolade, gefüllt mit weißer Schokolade',
+    pt: 'Cookie com maracujá e chocolate branco, recheado com chocolate branco',
+    ru: 'Печенье с маракуйей и белым шоколадом, с начинкой из белого шоколада'
+  },
+  image: '/images/dishes/ny-passion.jpg',
+  price: '4.20€',
+  available: false,
+  allergens: ['cereales', 'huevos', 'leche']
+},
+{
+  id: 'new-york-cookie-red-velvet',
+  name: {
+    es: 'New York Cookie Red Velvet',
+    en: 'Red Velvet New York Cookie',
+    it: 'New York Cookie Red Velvet',
+    fr: 'New York Cookie Red Velvet',
+    de: 'Red Velvet New York Cookie',
+    pt: 'New York Cookie Red Velvet',
+    ru: 'New York Cookie Red Velvet'
+  },
+  description: {
+    es: 'Galleta Red Velvet rellena de chocolate blanco',
+    en: 'Red Velvet cookie filled with white chocolate',
+    it: 'Cookie Red Velvet con ripieno di cioccolato bianco',
+    fr: 'Cookie Red Velvet fourré au chocolat blanc',
+    de: 'Red-Velvet-Cookie mit weißer Schokoladenfüllung',
+    pt: 'Cookie Red Velvet recheado com chocolate branco',
+    ru: 'Печенье Red Velvet с начинкой из белого шоколада'
+  },
+  image: '/images/dishes/ny-red-velvet.jpg',
+  price: '4.20€',
+  available: false,
+  allergens: ['cereales', 'huevos', 'leche']
+},
+{
+  id: 'new-york-cookie-lotus',
+  name: {
+    es: 'New York Cookie Lotus',
+    en: 'Lotus New York Cookie',
+    it: 'New York Cookie Lotus',
+    fr: 'New York Cookie Lotus',
+    de: 'New York Cookie Lotus',
+    pt: 'New York Cookie Lotus',
+    ru: 'New York Cookie Lotus'
+  },
+  description: {
+    es: 'Galleta Lotus rellena de crema Lotus',
+    en: 'Lotus cookie filled with Lotus cream',
+    it: 'Cookie Lotus con ripieno di crema Lotus',
+    fr: 'Cookie Lotus fourré à la crème Lotus',
+    de: 'Lotus-Cookie mit Lotuscreme-Füllung',
+    pt: 'Cookie Lotus recheado com creme Lotus',
+    ru: 'Печенье Lotus с кремовой начинкой Lotus'
+  },
+  image: '/images/dishes/ny-lotus.jpg',
+  price: '4.20€',
+  available: false,
+  allergens: ['cereales', 'huevos', 'leche']
 },
 {
   id: 'new-york-cookie-pistacho',
@@ -649,6 +844,7 @@ export const cakesData = [
     pt: 'Cookie com pedaços de pistacho, recheado com creme de pistacho',
     ru: 'Печенье с кусочками фисташки, с фисташковым кремом'
   },
+  image: '/images/dishes/ny-pistacho.jpg',
   price: '4.20€',
   available: true,
   allergens: ['cereales', 'huevos', 'leche', 'frutos_secos']

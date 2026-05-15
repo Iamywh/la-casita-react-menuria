@@ -164,7 +164,7 @@ export const menuData = [
             "id": "barraquito-con-licor",
             "nameKey": "menu_barraquito_con_licor_name",
             "price": "2.70€",
-            "image": "/images/dishes/barraquito-con-licor.png",
+            "image": "/images/dishes/barraquito-licor.jpg",
             "descriptionKey": "menu_barraquito_con_licor_desc",
             "ingredients": [
               "ing_cafe",
@@ -481,7 +481,7 @@ export const menuData = [
             "id": "sandwich-siempre",
             "nameKey": "menu_sandwich_siempre_name",
             "price": "3.80€",
-            "image": "/images/dishes/sandwich-siempre.png",
+            "image": "/images/dishes/s-mixto.jpg",
             "descriptionKey": "menu_sandwich_siempre_desc",
             "ingredients": [
               "ing_jamon",
@@ -502,7 +502,7 @@ export const menuData = [
             "id": "sandwich-clasico",
             "nameKey": "menu_sandwich_clasico_name",
             "price": "4.20€",
-            "image": "/images/dishes/sandwich-clasico.png",
+            "image": "/images/dishes/s-clasico.jpg",
             "descriptionKey": "menu_sandwich_clasico_desc",
             "ingredients": [
               "ing_pollo",
@@ -527,7 +527,7 @@ export const menuData = [
             "id": "sandwich-la-casita",
             "nameKey": "menu_sandwich_la_casita_name",
             "price": "4.90€",
-            "image": "/images/dishes/sandwich-la-casita.png",
+            "image": "/images/dishes/s-casita.jpg",
             "descriptionKey": "menu_sandwich_la_casita_desc",
             "ingredients": [
               "ing_pastrami",
@@ -576,7 +576,7 @@ export const menuData = [
             "id": "tosta-tumaquin",
             "nameKey": "menu_tosta_tumaquin_name",
             "price": "4.30€",
-            "image": "/images/dishes/tosta-tumaquin.png",
+            "image": "/images/dishes/tosta-tumaquin.jpg",
             "descriptionKey": "menu_tosta_tumaquin_desc",
             "ingredients": [
               "ing_tomate",
@@ -597,7 +597,7 @@ export const menuData = [
             "id": "tosta-campestre",
             "nameKey": "menu_tosta_campestre_name",
             "price": "4.20€",
-            "image": "/images/dishes/tosta-campestre.png",
+            "image": "/images/dishes/tosta-campestre.jpg",
             "descriptionKey": "menu_tosta_campestre_desc",
             "ingredients": [
               "ing_calabacin",
@@ -640,7 +640,7 @@ export const menuData = [
             "id": "croissant",
             "nameKey": "menu_croissant_name",
             "price": "3.20€",
-            "image": "/images/dishes/croissant.png",
+            "image": "/images/dishes/croissant.jpg",
             "descriptionKey": "menu_croissant_desc",
             "ingredients": [
               "ing_harina",
@@ -660,7 +660,7 @@ export const menuData = [
             "id": "croissant-jamon-queso",
             "nameKey": "menu_croissant_jamon_queso_name",
             "price": "3.90€",
-            "image": "/images/dishes/croissant-jamon-queso.png",
+            "image": "/images/dishes/croissant-mixto.jpg",
             "descriptionKey": "menu_croissant_jamon_queso_desc",
             "ingredients": [
               "ing_jamon",
@@ -881,7 +881,7 @@ export const menuData = [
             "id": "maria-victoria",
             "nameKey": "menu_maria_victoria_name",
             "price": "5.40€",
-            "image": "/images/dishes/maria-victoria.png",
+            "image": "/images/dishes/maria-victoria.jpg",
             "descriptionKey": "menu_maria_victoria_desc",
             "ingredients": [
               "ing_harina",
@@ -903,7 +903,7 @@ export const menuData = [
             "id": "new-york-cookies",
             "nameKey": "menu_new_york_cookies_name",
             "price": "4.20€",
-            "image": "/images/dishes/new-york-cookies.png",
+            "image": "/images/dishes/ny-red-velvet.jpg",
             "descriptionKey": "menu_new_york_cookies_desc",
             "ingredients": [
               "ing_harina",
@@ -922,7 +922,7 @@ export const menuData = [
             "id": "cookies",
             "nameKey": "menu_cookies_name",
             "price": "3.00€",
-            "image": "/images/dishes/cookies.png",
+            "image": "/images/dishes/cookie-platano.jpg",
             "descriptionKey": "menu_cookies_desc",
             "ingredients": [
               "ing_harina",
@@ -941,7 +941,7 @@ export const menuData = [
             "id": "rollitos-canela",
             "nameKey": "menu_rollitos_canela_name",
             "price": "2.40€",
-            "image": "/images/dishes/rollitos-canela.png",
+            "image": "/images/dishes/rollito-canela.jpg",
             "descriptionKey": "menu_rollitos_canela_desc",
             "ingredients": [
               "ing_harina",
@@ -960,7 +960,7 @@ export const menuData = [
             "id": "brownie",
             "nameKey": "menu_brownie_name",
             "price": "3.20€",
-            "image": "/images/dishes/brownie.png",
+            "image": "/images/dishes/brownie-choc.jpg",
             "descriptionKey": "menu_brownie_desc",
             "ingredients": [
               "ing_chocolate",
@@ -980,7 +980,7 @@ export const menuData = [
             "id": "palmera",
             "nameKey": "menu_palmera_name",
             "price": "3.10€",
-            "image": "/images/dishes/palmera.png",
+            "image": "/images/dishes/palmera.jpg",
             "descriptionKey": "menu_palmera_desc",
             "ingredients": [
               "ing_harina",
@@ -1039,7 +1039,7 @@ export const menuData = [
                 "price": "4.50€"
               }
             ],
-            "image": "/images/dishes/bocadillo-chef.png",
+            "image": "/images/dishes/b-chef.jpg",
             "descriptionKey": "menu_bocadillo_chef_desc",
             "ingredients": [
               "ing_lomo",
@@ -1072,7 +1072,7 @@ export const menuData = [
                 "price": "4.80€"
               }
             ],
-            "image": "/images/dishes/bocadillo-pata.png",
+            "image": "/images/dishes/b-pata.jpg",
             "descriptionKey": "menu_bocadillo_pata_desc",
             "ingredients": [
               "ing_pata",
@@ -1103,7 +1103,7 @@ export const menuData = [
                 "price": "4.80€"
               }
             ],
-            "image": "/images/dishes/bocadillo-clasico.png",
+            "image": "/images/dishes/b-clasico.jpg",
             "descriptionKey": "menu_bocadillo_clasico_desc",
             "ingredients": [
               "ing_pollo",
@@ -1138,7 +1138,7 @@ export const menuData = [
                 "price": "5.20€"
               }
             ],
-            "image": "/images/dishes/bocadillo-steak.png",
+            "image": "/images/dishes/b-steakhouse.jpg",
             "descriptionKey": "menu_bocadillo_steak_desc",
             "ingredients": [
               "ing_ternera",
@@ -2454,7 +2454,7 @@ export const menuData = [
             "id": "ensaladilla-la-casita",
             "nameKey": "menu_ensaladilla_la_casita_name",
             "price": "14.50€",
-            "image": "/images/dishes/ensaladilla.jpeg",
+            "image": "/images/dishes/ensaladilla.jpg",
             "descriptionKey": "menu_ensaladilla_la_casita_desc",
             "ingredients": [
               "ing_batata",
@@ -2545,7 +2545,7 @@ export const menuData = [
             "id": "huevos-rotos-langostinos",
             "nameKey": "menu_huevos_rotos_langostinos_name",
             "price": "15.50€",
-            "image": "/images/dishes/huevos-rotos-langostinos.png",
+            "image": "/images/dishes/huevos-rotos-langostinos.jpg",
             "descriptionKey": "menu_huevos_rotos_langostinos_desc",
             "ingredients": [
               "ing_huevos",
@@ -2675,7 +2675,7 @@ export const menuData = [
             "id": "ensalada-ahumados",
             "nameKey": "menu_ensalada_ahumados_name",
             "price": "16.50€",
-            "image": "/images/dishes/ensalada-ahumados.png",
+            "image": "/images/dishes/ensalada-ahumados.jpg",
             "descriptionKey": "menu_ensalada_ahumados_desc",
             "ingredients": [
               "ing_salmon",
