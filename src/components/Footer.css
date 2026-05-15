@@ -116,3 +116,20 @@
 .footer-menuria {
   border-radius: 0 0 8px 8px;
 }
+
+.footer-feedback-btn {
+  border: none;
+  border-radius: 999px;
+  padding: 10px 16px;
+  background: #f6c453;
+  color: #3a240d;
+  font-weight: 800;
+  cursor: pointer;
+  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.15);
+  transition: transform 0.18s ease, box-shadow 0.18s ease;
+}
+
+.footer-feedback-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.22);
+}

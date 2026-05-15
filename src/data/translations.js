@@ -618,8 +618,17 @@ export const translations = {
     hours_thursday: 'Jueves',
     hours_friday: 'Viernes',
     hours_saturday: 'Sábado',
-    hours_sunday: 'Domingo'
-    
+    hours_sunday: 'Domingo',
+    feedback_kicker: 'Tu opinión nos ayuda',
+    feedback_title: '¿Cómo ha sido tu experiencia?',
+    feedback_text: 'Valora Menuria y ayuda a La Casita a mejorar cada día.',
+    feedback_happy: 'Genial',
+    feedback_neutral: 'Normal',
+    feedback_sad: 'Mejorable',
+    feedback_placeholder: '¿Quieres dejarnos un comentario?',
+    feedback_send: 'Enviar opinión',
+    feedback_google: '⭐ Valorar en Google',
+    feedback_success: 'Gracias por tu opinión 💛'
     
   },
   en: {
@@ -1237,7 +1246,17 @@ export const translations = {
     hours_thursday: 'Thursday',
     hours_friday: 'Friday',
     hours_saturday: 'Saturday',
-    hours_sunday: 'Sunday'
+    hours_sunday: 'Sunday',
+    feedback_kicker: 'Your opinion helps us',
+    feedback_title: 'How was your experience?',
+    feedback_text: 'Rate Menuria and help La Casita improve every day.',
+    feedback_happy: 'Amazing',
+    feedback_neutral: 'Okay',
+    feedback_sad: 'Needs improvement',
+    feedback_placeholder: 'Would you like to leave a comment?',
+    feedback_send: 'Send feedback',
+    feedback_google: '⭐ Review on Google',
+    feedback_success: 'Thank you for your feedback 💛'
     
   },
   it: {
@@ -1855,7 +1874,17 @@ export const translations = {
     hours_thursday: 'Giovedì',
     hours_friday: 'Venerdì',
     hours_saturday: 'Sabato',
-    hours_sunday: 'Domenica'
+    hours_sunday: 'Domenica',
+    feedback_kicker: 'La tua opinione ci aiuta',
+    feedback_title: 'Com’è stata la tua esperienza?',
+    feedback_text: 'Valuta Menuria e aiuta La Casita a migliorare ogni giorno.',
+    feedback_happy: 'Fantastica',
+    feedback_neutral: 'Normale',
+    feedback_sad: 'Da migliorare',
+    feedback_placeholder: 'Vuoi lasciarci un commento?',
+    feedback_send: 'Invia opinione',
+    feedback_google: '⭐ Valuta su Google',
+    feedback_success: 'Grazie per la tua opinione 💛'
 
   },
   fr: {
@@ -2474,6 +2503,16 @@ export const translations = {
     hours_saturday: 'Samedi',
     hours_sunday: 'Dimanche',
     loading: 'Chargement...',
+    feedback_kicker: 'Votre avis nous aide',
+    feedback_title: 'Comment a été votre expérience ?',
+    feedback_text: 'Évaluez Menuria et aidez La Casita à s’améliorer chaque jour.',
+    feedback_happy: 'Génial',
+    feedback_neutral: 'Correct',
+    feedback_sad: 'À améliorer',
+    feedback_placeholder: 'Voulez-vous laisser un commentaire ?',
+    feedback_send: 'Envoyer',
+    feedback_google: '⭐ Évaluer sur Google',
+    feedback_success: 'Merci pour votre avis 💛'
   },
   de: {
     menu: 'Menü',
@@ -3090,7 +3129,17 @@ export const translations = {
     hours_friday: 'Freitag',
     hours_saturday: 'Samstag',
     hours_sunday: 'Sonntag',
-    loading: 'Lädt...'
+    loading: 'Lädt...',
+    feedback_kicker: 'Ihre Meinung hilft uns',
+    feedback_title: 'Wie war Ihre Erfahrung?',
+    feedback_text: 'Bewerten Sie Menuria und helfen Sie La Casita, sich jeden Tag zu verbessern.',
+    feedback_happy: 'Großartig',
+    feedback_neutral: 'Normal',
+    feedback_sad: 'Verbesserbar',
+    feedback_placeholder: 'Möchten Sie einen Kommentar hinterlassen?',
+    feedback_send: 'Bewertung senden',
+    feedback_google: '⭐ Auf Google bewerten',
+    feedback_success: 'Danke für Ihre Bewertung 💛'
   },
   pt: {
     menu: 'Menu',
@@ -3707,7 +3756,17 @@ export const translations = {
     hours_friday: 'Sexta-feira',
     hours_saturday: 'Sábado',
     hours_sunday: 'Domingo',
-    loading: 'A carregar...'
+    loading: 'A carregar...',
+    feedback_kicker: 'A sua opinião ajuda-nos',
+    feedback_title: 'Como foi a sua experiência?',
+    feedback_text: 'Avalie o Menuria e ajude La Casita a melhorar todos os dias.',
+    feedback_happy: 'Excelente',
+    feedback_neutral: 'Normal',
+    feedback_sad: 'Pode melhorar',
+    feedback_placeholder: 'Gostaria de deixar um comentário?',
+    feedback_send: 'Enviar opinião',
+    feedback_google: '⭐ Avaliar no Google',
+    feedback_success: 'Obrigado pela sua opinião 💛'
   },
   ru: {
     menu: 'Меню',
@@ -4324,6 +4383,16 @@ export const translations = {
     hours_friday: 'Пятница',
     hours_saturday: 'Суббота',
     hours_sunday: 'Воскресенье',
-    loading: 'Загрузка...'
+    loading: 'Загрузка...',
+    feedback_kicker: 'Ваше мнение помогает нам',
+    feedback_title: 'Как вам понравилось?',
+    feedback_text: 'Оцените Menuria и помогите La Casita становиться лучше каждый день.',
+    feedback_happy: 'Отлично',
+    feedback_neutral: 'Нормально',
+    feedback_sad: 'Можно улучшить',
+    feedback_placeholder: 'Хотите оставить комментарий?',
+    feedback_send: 'Отправить отзыв',
+    feedback_google: '⭐ Оценить в Google',
+    feedback_success: 'Спасибо за ваш отзыв 💛'
   }
 };

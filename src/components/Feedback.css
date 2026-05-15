@@ -1,0 +1,198 @@
+.feedback-section {
+  padding: 60px 20px;
+  background:
+    radial-gradient(circle at top left, rgba(255, 214, 122, 0.25), transparent 35%),
+    linear-gradient(135deg, #fff8ec, #f4ead8);
+}
+
+.feedback-card {
+  max-width: 760px;
+  margin: 0 auto;
+  padding: 36px 28px;
+  border-radius: 28px;
+  background: rgba(255, 255, 255, 0.88);
+  box-shadow: 0 18px 45px rgba(83, 52, 17, 0.18);
+  border: 1px solid rgba(120, 78, 34, 0.18);
+  text-align: center;
+  backdrop-filter: blur(8px);
+}
+
+.feedback-kicker {
+  display: inline-block;
+  margin-bottom: 10px;
+  padding: 6px 14px;
+  border-radius: 999px;
+  background: #533411;
+  color: #fff5df;
+  font-size: 0.85rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.feedback-card h2 {
+  margin: 8px 0;
+  color: #3a240d;
+  font-size: clamp(1.8rem, 4vw, 2.5rem);
+}
+
+.feedback-text {
+  color: #6b4a28;
+  margin-bottom: 28px;
+}
+
+.feedback-emojis {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 14px;
+  margin-bottom: 22px;
+}
+
+.feedback-emojis button {
+  border: 2px solid transparent;
+  border-radius: 22px;
+  padding: 18px 10px;
+  background: #fffaf1;
+  cursor: pointer;
+  font-size: 2.4rem;
+  box-shadow: 0 8px 18px rgba(83, 52, 17, 0.1);
+  transition: transform 0.18s ease, border 0.18s ease, background 0.18s ease;
+}
+
+.feedback-emojis button:hover {
+  transform: translateY(-4px);
+  background: #fff1cc;
+}
+
+.feedback-emojis button span {
+  display: block;
+  margin-top: 8px;
+  font-size: 0.95rem;
+  color: #533411;
+  font-weight: 700;
+}
+
+.feedback-emojis .selected {
+  border-color: #d8a63a;
+  background: #ffe6a3;
+  transform: translateY(-4px) scale(1.03);
+}
+
+.feedback-card textarea {
+  width: 100%;
+  min-height: 110px;
+  resize: vertical;
+  border-radius: 18px;
+  border: 1px solid rgba(83, 52, 17, 0.25);
+  padding: 16px;
+  font-family: inherit;
+  font-size: 1rem;
+  outline: none;
+  background: #fffdf8;
+  color: #3a240d;
+}
+
+.feedback-card textarea:focus {
+  border-color: #d8a63a;
+  box-shadow: 0 0 0 3px rgba(216, 166, 58, 0.2);
+}
+
+.feedback-actions {
+  display: flex;
+  justify-content: center;
+  gap: 14px;
+  margin-top: 22px;
+  flex-wrap: wrap;
+}
+
+.send-feedback-btn,
+.google-review-btn {
+  border: none;
+  border-radius: 999px;
+  padding: 13px 22px;
+  font-weight: 800;
+  cursor: pointer;
+  text-decoration: none;
+  transition: transform 0.18s ease, box-shadow 0.18s ease;
+}
+
+.send-feedback-btn {
+  background: #533411;
+  color: white;
+}
+
+.google-review-btn {
+  background: #f6c453;
+  color: #3a240d;
+}
+
+.send-feedback-btn:hover,
+.google-review-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 20px rgba(83, 52, 17, 0.18);
+}
+
+.feedback-success {
+  margin-top: 18px;
+  color: #2f7d32;
+  font-weight: 800;
+}
+
+@media (max-width: 600px) {
+  .feedback-emojis {
+    grid-template-columns: 1fr;
+  }
+
+  .feedback-card {
+    padding: 28px 18px;
+  }
+}
+
+
+.feedback-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  background: rgba(0, 0, 0, 0.58);
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  padding: 40px 16px;
+  overflow-y: auto;
+}
+
+.feedback-modal {
+  position: relative;
+  width: 100%;
+  max-width: 780px;
+  padding: 0;
+  background: transparent;
+  margin: auto 0;
+}
+
+.feedback-card {
+  width: 100%;
+  box-sizing: border-box;
+  max-height: none;
+}
+
+.feedback-card textarea {
+  width: 100%;
+  box-sizing: border-box;
+  max-width: 100%;
+}
+
+.feedback-close {
+  position: sticky;
+  top: 10px;
+  margin-left: auto;
+  display: block;
+  width: 42px;
+  height: 42px;
+  border: none;
+  border-radius: 50%;
+  background: #533411;
+  color: white;
+  font-size: 1.8rem;
+  cursor: pointer;
+  z-index: 3;
+}
