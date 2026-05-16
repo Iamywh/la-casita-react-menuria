@@ -13,23 +13,18 @@ function ManagerDashboard() {
   const [errorMsg, setErrorMsg] = useState('')
   const [menuItems, setMenuItems] = useState([])
   const [availability, setAvailability] = useState([])
-  const [openSection, setOpenSection] = useState('requests')
+  const [activePanel, setActivePanel] = useState(null)
   const [selectedRequestId, setSelectedRequestId] = useState(null)
   const [openMenuGroup, setOpenMenuGroup] = useState(null)
+  const [terraceOpen, setTerraceOpen] = useState(false)
+  const [reservations, setReservations] = useState([])
 
-  const t = (key) => {
-    return translations.es?.[key] || key
-  }
+  const t = (key) => translations.es?.[key] || key
 
   const getLocalizedText = (value) => {
     if (!value) return ''
-
     if (typeof value === 'string') return value
-
-    if (typeof value === 'object') {
-      return value.es || value.en || value.it || ''
-    }
-
+    if (typeof value === 'object') return value.es || value.en || value.it || ''
     return ''
   }
 
@@ -76,6 +71,103 @@ function ManagerDashboard() {
     setAvailability(data || [])
   }
 
+  const fetchRestaurantStatus = async () => {
+  const { data, error } = await supabase
+    .from('restaurant_status')
+    .select('*')
+    .limit(1)
+    .maybeSingle()
+
+  if (error) {
+    console.error('Restaurant status error:', error)
+    return
+  }
+
+  setTerraceOpen(data?.terrace_open ?? false)
+}
+
+  const toggleTerrace = async () => {
+  const nextValue = !terraceOpen
+
+  const { data: currentStatus, error: fetchError } = await supabase
+    .from('restaurant_status')
+    .select('id')
+    .limit(1)
+    .maybeSingle()
+
+  if (fetchError || !currentStatus) {
+    console.error(fetchError)
+    alert('No existe una fila de estado para la azotea')
+    return
+  }
+
+  const { error } = await supabase
+    .from('restaurant_status')
+    .update({
+      terrace_open: nextValue,
+      updated_at: new Date().toISOString()
+    })
+    .eq('id', currentStatus.id)
+
+  if (error) {
+    console.error(error)
+    alert('Error actualizando la azotea')
+    return
+  }
+
+  setTerraceOpen(nextValue)
+}
+
+const fetchReservations = async () => {
+  const { data, error } = await supabase
+    .from('restaurant_reservations')
+    .select('*')
+    .neq('status', 'archived')
+    .order('created_at', { ascending: false })
+
+  if (error) {
+    console.error(error)
+    alert('Error cargando reservas')
+    return
+  }
+
+  setReservations(data || [])
+}
+const updateReservationStatus = async (id, status) => {
+  const { error } = await supabase
+    .from('restaurant_reservations')
+    .update({ status })
+    .eq('id', id)
+
+  if (error) {
+    console.error(error)
+    alert('Error actualizando la reserva')
+    return
+  }
+
+  fetchReservations()
+}
+const archiveReservation = async (id) => {
+  const confirmed = window.confirm(
+    '¿Archivar esta reserva? Hazlo solo si ya está apuntada en el diario.'
+  )
+
+  if (!confirmed) return
+
+  const { error } = await supabase
+    .from('restaurant_reservations')
+    .update({ status: 'archived' })
+    .eq('id', id)
+
+  if (error) {
+    console.error(error)
+    alert('Error archivando la reserva')
+    return
+  }
+
+  fetchReservations()
+}
+
   const syncMenuAvailability = async () => {
     const allItems = getAllMenuItems()
 
@@ -114,7 +206,7 @@ function ManagerDashboard() {
       return
     }
 
-    alert(`Sincronizados ${missingRows.length} platos`)
+    alert(`Sincronizados ${missingRows.length} productos`)
     fetchAvailability()
   }
 
@@ -156,13 +248,13 @@ function ManagerDashboard() {
 
   const groupedMenuItems = useMemo(() => {
     return sortedMenuItems.reduce((groups, item) => {
-      const key = item.isCake ? '🍰 Tartas, cookies y NY cookies' : item.parent || 'Sin categoría'
+      const key = item.isCake
+        ? '🍰 Tartas, cookies y NY cookies'
+        : item.parent || 'Sin categoría'
 
-      if (!groups[key]) {
-        groups[key] = []
-      }
-
+      if (!groups[key]) groups[key] = []
       groups[key].push(item)
+
       return groups
     }, {})
   }, [sortedMenuItems])
@@ -185,6 +277,8 @@ function ManagerDashboard() {
     if (session) {
       fetchRequests()
       fetchAvailability()
+      fetchRestaurantStatus()
+      fetchReservations()
     }
   }, [session])
 
@@ -228,9 +322,9 @@ function ManagerDashboard() {
     setLoading(false)
   }
 
-  const deleteTestRequests = async () => {
+  const deleteAllBrunchRequests = async () => {
     const confirmed = window.confirm(
-      '¿Eliminar solicitudes de prueba? Esto borrará reservas cuyo nombre, contacto o notas contengan "test" o "prueba".'
+      '¿Eliminar TODAS las solicitudes de brunch? Esta acción no se puede deshacer.'
     )
 
     if (!confirmed) return
@@ -238,23 +332,23 @@ function ManagerDashboard() {
     const { error } = await supabase
       .from('brunch_requests')
       .delete()
-      .or('name.ilike.%test%,name.ilike.%prueba%,contact.ilike.%test%,notes.ilike.%test%,notes.ilike.%prueba%')
+      .neq('id', '00000000-0000-0000-0000-000000000000')
 
     if (error) {
       console.error(error)
-      alert('Error eliminando solicitudes de prueba')
+      alert('Error eliminando solicitudes')
       return
     }
 
-    alert('Solicitudes de prueba eliminadas')
+    alert('Solicitudes eliminadas')
     fetchRequests()
   }
-
-  const getStatusLabel = (status) => {
+    const getStatusLabel = (status) => {
     const labels = {
       new: 'Nueva',
       confirmed: 'Confirmada',
-      rejected: 'Rechazada'
+      rejected: 'Rechazada',
+      archived: 'Archivada',
     }
 
     return labels[status] || status
@@ -344,21 +438,38 @@ La Casita`
 
     const cleanPhone = req.contact.replace(/\D/g, '')
     const whatsappMessage = encodeURIComponent(message)
+
     window.open(`https://wa.me/${cleanPhone}?text=${whatsappMessage}`, '_blank')
   }
 
   const renderRequestDetail = (req) => {
     return (
       <div className="manager-request-detail">
-        <p><strong>Contacto:</strong> {req.contact}</p>
-        <p><strong>Fecha:</strong> {req.request_date}</p>
-        <p><strong>Hora:</strong> {req.request_time}</p>
-        <p><strong>Personas:</strong> {req.people}</p>
-        <p><strong>Notas:</strong> {req.notes || '—'}</p>
+        <p>
+          <strong>Contacto:</strong> {req.contact}
+        </p>
+
+        <p>
+          <strong>Fecha:</strong> {req.request_date}
+        </p>
+
+        <p>
+          <strong>Hora:</strong> {req.request_time}
+        </p>
+
+        <p>
+          <strong>Personas:</strong> {req.people}
+        </p>
+
+        <p>
+          <strong>Notas:</strong> {req.notes || '—'}
+        </p>
 
         {req.brunch_selections?.length > 0 && (
           <div className="brunch-selections-box">
-            <p><strong>Opciones brunch:</strong></p>
+            <p>
+              <strong>Opciones brunch:</strong>
+            </p>
 
             {req.brunch_selections.map((selection, index) => (
               <p key={`${req.id}-selection-${index}`}>
@@ -398,6 +509,14 @@ La Casita`
             Rechazar
           </button>
 
+            <button
+              className="new-btn"
+              type="button"
+              onClick={() => archiveReservation(reservation.id)}
+            >
+              Archivar
+            </button>
+
           <button
             className="new-btn"
             type="button"
@@ -409,15 +528,20 @@ La Casita`
       </div>
     )
   }
-
-  const renderMenuItemCard = (item) => {
+    const renderMenuItemCard = (item) => {
     const available = isItemAvailable(item.id)
-    const cakeClass = item.isCake ? `manager-cake-card cake-type-${item.cakeType || 'cake'}` : 'manager-card'
+
+    const cakeClass = item.isCake
+      ? `manager-cake-card cake-type-${item.cakeType || 'cake'}`
+      : 'manager-card'
 
     return (
       <div className={cakeClass} key={item.id}>
         <h3>{item.name}</h3>
-        <p><strong>Sección:</strong> {item.category}</p>
+
+        <p>
+          <strong>Sección:</strong> {item.category}
+        </p>
 
         {item.isCake && (
           <p className="cake-type-label">
@@ -438,6 +562,237 @@ La Casita`
     )
   }
 
+  const renderPanelContent = () => {
+    if (activePanel === 'azotea') {
+      return (
+        <div className="manager-popup-content">
+          <h2>🌇 Estado de la azotea</h2>
+
+          <p>
+            Activa o cierra la azotea visible para los clientes.
+          </p>
+
+          <div className={`manager-status-big ${terraceOpen ? 'open' : 'closed'}`}>
+            {terraceOpen ? '🟢 Azotea abierta' : '🔴 Azotea cerrada'}
+          </div>
+
+          <button
+            type="button"
+            className={terraceOpen ? 'reject-btn' : 'confirm-btn'}
+            onClick={toggleTerrace}
+          >
+            {terraceOpen ? 'Cerrar azotea' : 'Abrir azotea'}
+          </button>
+        </div>
+      )
+    }
+
+    if (activePanel === 'tartas') {
+      const cakeGroups = Object.entries(groupedMenuItems).filter(([name]) =>
+        name.includes('Tartas')
+      )
+
+      return (
+        <div className="manager-popup-content">
+          <div className="manager-header manager-subheader">
+            <h2>🍰 Tartas y cookies</h2>
+
+            <button type="button" onClick={syncMenuAvailability}>
+              Sincronizar
+            </button>
+          </div>
+
+          {cakeGroups.length === 0 && (
+            <p>No hay tartas o cookies cargadas.</p>
+          )}
+
+          {cakeGroups.map(([parentName, items]) => (
+            <div className="manager-menu-group" key={parentName}>
+              <div className="manager-cakes-grid">
+                {items.map(renderMenuItemCard)}
+              </div>
+            </div>
+          ))}
+        </div>
+      )
+    }
+
+    if (activePanel === 'menu') {
+      const normalGroups = Object.entries(groupedMenuItems).filter(([name]) =>
+        !name.includes('Tartas')
+      )
+
+      return (
+        <div className="manager-popup-content">
+          <div className="manager-header manager-subheader">
+            <h2>🍽️ Menú general</h2>
+
+            <button type="button" onClick={syncMenuAvailability}>
+              Sincronizar
+            </button>
+          </div>
+
+          {normalGroups.map(([parentName, items]) => (
+            <div className="manager-menu-group" key={parentName}>
+              <button
+                className="manager-menu-group-title manager-menu-group-subtitle"
+                type="button"
+                onClick={() =>
+                  setOpenMenuGroup((prev) =>
+                    prev === parentName ? null : parentName
+                  )
+                }
+              >
+                {parentName} {openMenuGroup === parentName ? '▲' : '▼'}
+              </button>
+
+              {openMenuGroup === parentName && (
+                <div className="manager-list">
+                  {items.map(renderMenuItemCard)}
+                </div>
+              )}
+            </div>
+          ))}
+        </div>
+      )
+    }
+
+    if (activePanel === 'brunch') {
+      return (
+        <div className="manager-popup-content">
+          <div className="manager-header manager-subheader">
+            <h2>📅 Brunch requests</h2>
+
+            <div className="manager-actions">
+              <button type="button" onClick={fetchRequests}>
+                Actualizar
+              </button>
+
+              <button
+                type="button"
+                className="reject-btn"
+                onClick={deleteAllBrunchRequests}
+              >
+                Eliminar solicitudes
+              </button>
+            </div>
+          </div>
+
+          {loading && <p>Cargando...</p>}
+
+          <div className="manager-list">
+            {requests.length === 0 && !loading && (
+              <p>No hay solicitudes de brunch.</p>
+            )}
+
+            {requests.map((req) => (
+              <div className="manager-card" key={req.id}>
+                <button
+                  type="button"
+                  className="manager-request-summary"
+                  onClick={() =>
+                    setSelectedRequestId((prev) =>
+                      prev === req.id ? null : req.id
+                    )
+                  }
+                >
+                  <span>
+                    <strong>{req.name}</strong> · {req.request_date} ·{' '}
+                    {req.request_time} · {req.people} pax
+                  </span>
+
+                  <span className={`status-badge status-${req.status}`}>
+                    {getStatusLabel(req.status)}
+                  </span>
+                </button>
+
+                {selectedRequestId === req.id && renderRequestDetail(req)}
+              </div>
+            ))}
+          </div>
+        </div>
+      )
+    }
+
+    if (activePanel === 'reservations') {
+  return (
+    <div className="manager-popup-content">
+      <div className="manager-header manager-subheader">
+        <h2>📖 Reservations</h2>
+
+        <button type="button" onClick={fetchReservations}>
+          Actualizar
+        </button>
+      </div>
+
+      <div className="manager-list">
+        {reservations.length === 0 && (
+          <p>No hay reservas generales.</p>
+        )}
+
+        {reservations.map((reservation) => (
+          <div className="manager-card" key={reservation.id}>
+            <h3>{reservation.name}</h3>
+
+            <p><strong>Contacto:</strong> {reservation.contact}</p>
+            <p><strong>Fecha:</strong> {reservation.reservation_date}</p>
+            <p><strong>Hora:</strong> {reservation.reservation_time}</p>
+            <p><strong>Personas:</strong> {reservation.people}</p>
+            <p><strong>Notas:</strong> {reservation.notes || '—'}</p>
+
+            <p>
+              <strong>Estado:</strong>{' '}
+              <span className={`status-badge status-${reservation.status}`}>
+                {getStatusLabel(reservation.status)}
+              </span>
+            </p>
+            <div className="manager-actions">
+  <button
+    className="confirm-btn"
+    type="button"
+    onClick={() => updateReservationStatus(reservation.id, 'confirmed')}
+  >
+    Confirmar
+  </button>
+
+  <button
+    className="reject-btn"
+    type="button"
+    onClick={() => updateReservationStatus(reservation.id, 'rejected')}
+  >
+    Rechazar
+  </button>
+
+  <button
+    className="reject-btn"
+    type="button"
+    onClick={() => deleteReservation(reservation.id)}
+  >
+    Eliminar
+  </button>
+</div>
+          </div>
+        ))}
+      </div>
+    </div>
+  )
+}
+
+    return null
+  }
+const deleteReservation = async (id) => {
+  const { error } = await supabase
+    .from('restaurant_reservations')
+    .delete()
+    .eq('id', id)
+
+  if (error) {
+    console.error(error)
+    return
+  }
+
+  fetchReservations()
+}
   if (!session) {
     return (
       <section className="manager-page">
@@ -460,9 +815,15 @@ La Casita`
             required
           />
 
-          <button type="submit">Entrar</button>
+          <button type="submit">
+            Entrar
+          </button>
 
-          {errorMsg && <p className="manager-error">{errorMsg}</p>}
+          {errorMsg && (
+            <p className="manager-error">
+              {errorMsg}
+            </p>
+          )}
         </form>
       </section>
     )
@@ -471,104 +832,89 @@ La Casita`
   return (
     <section className="manager-page">
       <div className="manager-header">
-        <h1>Panel de gestión</h1>
-        <button type="button" onClick={logout}>Cerrar sesión</button>
+        <div>
+          <h1>Panel de gestión</h1>
+          <p>Control rápido de operaciones del restaurante.</p>
+        </div>
+
+        <button type="button" onClick={logout}>
+          Cerrar sesión
+        </button>
       </div>
 
-      {errorMsg && <p className="manager-error">{errorMsg}</p>}
+      {errorMsg && (
+        <p className="manager-error">
+          {errorMsg}
+        </p>
+      )}
 
-      <div className="manager-section">
+      <div className="manager-panel-grid">
         <button
-          className="manager-menu-group-title"
           type="button"
-          onClick={() => setOpenSection(openSection === 'requests' ? null : 'requests')}
+          className="manager-panel-card"
+          onClick={() => setActivePanel('azotea')}
         >
-          📅 Reservas de brunch {openSection === 'requests' ? '▲' : '▼'}
+          <span>🌇</span>
+          <strong>Azotea</strong>
+          <small>{terraceOpen ? 'Abierta' : 'Cerrada'}</small>
         </button>
 
-        {openSection === 'requests' && (
-          <>
-            <div className="manager-header manager-subheader">
-              <h2>Solicitudes</h2>
-              <div className="manager-actions">
-                <button type="button" onClick={fetchRequests}>Actualizar</button>
-                <button type="button" className="reject-btn" onClick={deleteTestRequests}>
-                  Limpiar pruebas
-                </button>
-              </div>
-            </div>
-
-            {loading && <p>Cargando...</p>}
-
-            <div className="manager-list">
-              {requests.length === 0 && !loading && (
-                <p>No hay solicitudes de brunch.</p>
-              )}
-
-              {requests.map((req) => (
-                <div className="manager-card" key={req.id}>
-                  <button
-                    type="button"
-                    className="manager-request-summary"
-                    onClick={() =>
-                      setSelectedRequestId((prev) => (prev === req.id ? null : req.id))
-                    }
-                  >
-                    <span>
-                      <strong>{req.name}</strong> · {req.request_date} · {req.request_time} · {req.people} pax
-                    </span>
-
-                    <span className={`status-badge status-${req.status}`}>
-                      {getStatusLabel(req.status)}
-                    </span>
-                  </button>
-
-                  {selectedRequestId === req.id && renderRequestDetail(req)}
-                </div>
-              ))}
-            </div>
-          </>
-        )}
-      </div>
-
-      <div className="manager-section">
         <button
-          className="manager-menu-group-title"
           type="button"
-          onClick={() => setOpenSection(openSection === 'availability' ? null : 'availability')}
+          className="manager-panel-card"
+          onClick={() => setActivePanel('tartas')}
         >
-          🍽️ Disponibilidad del menú {openSection === 'availability' ? '▲' : '▼'}
+          <span>🍰</span>
+          <strong>Tartas</strong>
+          <small>Cakes & cookies</small>
         </button>
 
-        {openSection === 'availability' && (
-          <>
-            <div className="manager-header manager-subheader">
-              <h2>Platos y productos</h2>
-              <button type="button" onClick={syncMenuAvailability}>Sincronizar menú</button>
-            </div>
+        <button
+          type="button"
+          className="manager-panel-card"
+          onClick={() => setActivePanel('menu')}
+        >
+          <span>🍽️</span>
+          <strong>Menú</strong>
+          <small>Platos y productos</small>
+        </button>
 
-            {Object.entries(groupedMenuItems).map(([parentName, items]) => (
-              <div className="manager-menu-group" key={parentName}>
-                <button
-                  className="manager-menu-group-title manager-menu-group-subtitle"
-                  type="button"
-                  onClick={() =>
-                    setOpenMenuGroup((prev) => (prev === parentName ? null : parentName))
-                  }
-                >
-                  {parentName} {openMenuGroup === parentName ? '▲' : '▼'}
-                </button>
+        <button
+          type="button"
+          className="manager-panel-card"
+          onClick={() => setActivePanel('brunch')}
+        >
+          <span>🥐</span>
+          <strong>Brunch Res</strong>
+          <small>{requests.length} solicitudes</small>
+        </button>
 
-                {openMenuGroup === parentName && (
-                  <div className={parentName.includes('Tartas') ? 'manager-cakes-grid' : 'manager-list'}>
-                    {items.map(renderMenuItemCard)}
-                  </div>
-                )}
-              </div>
-            ))}
-          </>
-        )}
+        <button
+          type="button"
+          className="manager-panel-card"
+          onClick={() => setActivePanel('reservations')}
+        >
+          <span>📖</span>
+          <strong>Reservations</strong>
+          <small>{reservations.length} reservas</small>
+        </button>
       </div>
+
+      {activePanel && (
+        <div className="manager-popup-overlay">
+          <div className="manager-popup">
+            <button
+              type="button"
+              className="manager-popup-close"
+              onClick={() => setActivePanel(null)}
+            >
+              ×
+            </button>
+
+            {renderPanelContent()}
+          </div>
+        </div>
+      )}
     </section>
   )
 }

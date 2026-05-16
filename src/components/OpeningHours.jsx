@@ -5,6 +5,7 @@ import { supabase } from '../lib/supabaseClient'
 function OpeningHours({ lang }) {
   const [regularHours, setRegularHours] = useState([])
   const [specialDays, setSpecialDays] = useState([])
+  const [terraceOpen, setTerraceOpen] = useState(null)
   const [loading, setLoading] = useState(true)
 
   const t = (key) => {
@@ -13,7 +14,6 @@ function OpeningHours({ lang }) {
 
   const timeToMinutes = (time) => {
     if (!time) return null
-
     if (time === '24:00') return 24 * 60
 
     const [hours, minutes] = time.split(':').map(Number)
@@ -42,6 +42,12 @@ function OpeningHours({ lang }) {
         .from('special_opening_days')
         .select('*')
 
+      const { data: statusData, error: statusError } = await supabase
+        .from('restaurant_status')
+        .select('terrace_open')
+        .limit(1)
+        .single()
+
       if (hoursError) {
         console.error('Opening hours error:', hoursError)
       }
@@ -50,8 +56,13 @@ function OpeningHours({ lang }) {
         console.error('Special days error:', specialError)
       }
 
+      if (statusError) {
+        console.error('Restaurant status error:', statusError)
+      }
+
       setRegularHours(hoursData || [])
       setSpecialDays(specialData || [])
+      setTerraceOpen(statusData?.terrace_open ?? false)
       setLoading(false)
     }
 
@@ -136,7 +147,13 @@ function OpeningHours({ lang }) {
       </div>
 
       <div className={`hours-status ${isOpen ? 'open' : 'closed'}`}>
-        {isOpen ? `${t('abierto')}` : `${t('cerrado')}`}
+        {isOpen ? t('abierto') : t('cerrado')}
+      </div>
+
+      <div className={`terrace-status ${terraceOpen ? 'open' : 'closed'}`}>
+        {terraceOpen
+          ? `🟢 ${t('terraza_abierta')}`
+          : `🔴 ${t('terraza_cerrada')}`}
       </div>
 
       <p className="hours-note">

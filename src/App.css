@@ -1102,3 +1102,209 @@
 .cake-type-ny_cookie {
   background: #e8f0ff;
 }
+.terrace-status {
+  margin-top: 10px;
+  padding: 10px 14px;
+  border-radius: 999px;
+  font-weight: 800;
+  text-align: center;
+}
+
+.terrace-status.open {
+  background: rgba(46, 125, 50, 0.12);
+  color: #2e7d32;
+}
+
+.terrace-status.closed {
+  background: rgba(183, 28, 28, 0.12);
+  color: #b71c1c;
+}
+
+.manager-panel-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: 18px;
+  margin-top: 28px;
+}
+
+.manager-panel-card {
+  min-height: 150px;
+  border: none;
+  border-radius: 24px;
+  background: linear-gradient(145deg, #fff8ec, #f2dfbd);
+  box-shadow: 0 14px 30px rgba(83, 52, 17, 0.18);
+  cursor: pointer;
+  padding: 22px;
+  color: #3a240d;
+  transition: transform 0.18s ease, box-shadow 0.18s ease;
+}
+
+.manager-panel-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 18px 38px rgba(83, 52, 17, 0.25);
+}
+
+.manager-panel-card span {
+  display: block;
+  font-size: 2.4rem;
+  margin-bottom: 12px;
+}
+
+.manager-panel-card strong {
+  display: block;
+  font-size: 1.2rem;
+}
+
+.manager-panel-card small {
+  display: block;
+  margin-top: 6px;
+  opacity: 0.75;
+}
+
+.manager-popup-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  background: rgba(0, 0, 0, 0.62);
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  overflow-y: auto;
+  padding: 40px 16px;
+}
+
+.manager-popup {
+  width: 100%;
+  max-width: 1100px;
+  background: #fff8ec;
+  border-radius: 28px;
+  padding: 28px;
+  position: relative;
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.35);
+  margin: auto 0;
+}
+
+.manager-popup-close {
+  position: sticky;
+  top: 10px;
+  margin-left: auto;
+  display: block;
+  width: 42px;
+  height: 42px;
+  border: none;
+  border-radius: 50%;
+  background: #533411;
+  color: white;
+  font-size: 1.8rem;
+  cursor: pointer;
+  z-index: 5;
+}
+
+.manager-popup-content {
+  margin-top: 10px;
+}
+
+.manager-status-big {
+  padding: 20px;
+  border-radius: 22px;
+  font-weight: 900;
+  font-size: 1.4rem;
+  margin: 20px 0;
+  text-align: center;
+}
+
+.manager-status-big.open {
+  background: rgba(46, 125, 50, 0.14);
+  color: #2e7d32;
+}
+
+.manager-status-big.closed {
+  background: rgba(183, 28, 28, 0.14);
+  color: #b71c1c;
+}
+.reserve-table-btn {
+  border: none;
+  border-radius: 999px;
+  padding: 13px 22px;
+  background: #533411;
+  color: white;
+  font-weight: 800;
+  cursor: pointer;
+}
+
+.reservation-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  background: rgba(0, 0, 0, 0.58);
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 40px 16px;
+  overflow-y: auto;
+}
+
+.reservation-modal {
+  width: 100%;
+  max-width: 620px;
+  background: #fff8ec;
+  border-radius: 28px;
+  padding: 28px;
+  position: relative;
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.35);
+}
+
+.reservation-close {
+  position: absolute;
+  top: -14px;
+  right: -10px;
+  width: 42px;
+  height: 42px;
+  border: none;
+  border-radius: 50%;
+  background: #533411;
+  color: white;
+  font-size: 1.8rem;
+  cursor: pointer;
+}
+
+.reservation-form {
+  display: grid;
+  gap: 14px;
+}
+
+.reservation-form input,
+.reservation-form textarea {
+  width: 100%;
+  box-sizing: border-box;
+  border-radius: 16px;
+  border: 1px solid rgba(83, 52, 17, 0.25);
+  padding: 13px 15px;
+  font-family: inherit;
+}
+
+.reservation-form textarea {
+  min-height: 100px;
+  resize: vertical;
+}
+
+.reservation-submit {
+  border: none;
+  border-radius: 999px;
+  padding: 13px 22px;
+  background: #f6c453;
+  color: #3a240d;
+  font-weight: 900;
+  cursor: pointer;
+}
+
+.reservation-success {
+  color: #2e7d32;
+  font-weight: 800;
+}
+
+.reservation-error,
+.reservation-large-note {
+  color: #b71c1c;
+  font-weight: 700;
+}

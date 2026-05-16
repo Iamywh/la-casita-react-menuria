@@ -1,6 +1,9 @@
 import './Footer.css'
+import { translations } from '../data/translations'
 
-function Footer({ onOpenFeedback }) {
+function Footer({ lang, onOpenFeedback }) {
+  const t = (key) => translations[lang]?.[key] || key
+
   return (
     <footer className="site-footer">
 
@@ -98,7 +101,7 @@ function Footer({ onOpenFeedback }) {
             className="footer-feedback-btn"
             onClick={onOpenFeedback}
           >
-            💬 Valuta Menuria
+            💬 {t('feedback_text')}
           </button>
 
         </div>
