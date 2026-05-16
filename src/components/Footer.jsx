@@ -11,18 +11,13 @@ function Footer({ lang, onOpenFeedback }) {
       <section className="footer-band footer-casita">
 
         <div className="footer-brand">
-          <a
-            href="https://menuria-solutions.netlify.app/"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="footer-logo-link"
-          >
+          
             <img
               src="/images/icons/logo.png"
               alt="La Casita logo"
               className="footer-logo"
             />
-          </a>
+          
 
           <p className="footer-title">
             La Casita del Nazareno
