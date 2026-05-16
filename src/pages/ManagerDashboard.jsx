@@ -509,13 +509,13 @@ La Casita`
             Rechazar
           </button>
 
-            <button
-              className="new-btn"
-              type="button"
-              onClick={() => archiveReservation(reservation.id)}
-            >
-              Archivar
-            </button>
+           <button
+            className="new-btn"
+            type="button"
+            onClick={() => updateStatus(req.id, 'new')}
+          >
+            Nueva
+          </button>
 
           <button
             className="new-btn"
@@ -764,12 +764,12 @@ La Casita`
   </button>
 
   <button
-    className="reject-btn"
-    type="button"
-    onClick={() => deleteReservation(reservation.id)}
-  >
-    Eliminar
-  </button>
+  className="new-btn"
+  type="button"
+  onClick={() => archiveReservation(reservation.id)}
+>
+  Archivar
+</button>
 </div>
           </div>
         ))}
@@ -780,19 +780,7 @@ La Casita`
 
     return null
   }
-const deleteReservation = async (id) => {
-  const { error } = await supabase
-    .from('restaurant_reservations')
-    .delete()
-    .eq('id', id)
 
-  if (error) {
-    console.error(error)
-    return
-  }
-
-  fetchReservations()
-}
   if (!session) {
     return (
       <section className="manager-page">
