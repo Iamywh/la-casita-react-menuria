@@ -2596,7 +2596,7 @@ export const menuData = [
             "id": "ensalada-la-jefa",
             "nameKey": "menu_ensalada_la_jefa_name",
             "price": "13.50€",
-            "image": "/images/dishes/ensalada-la-jefa.png",
+            "image": "/images/dishes/ensalada-la-jefa.jpg",
             "descriptionKey": "menu_ensalada_la_jefa_desc",
             "ingredients": [
               "ing_tomate",
@@ -2620,7 +2620,7 @@ export const menuData = [
             "id": "ensalada-pollo",
             "nameKey": "menu_ensalada_pollo_name",
             "price": "15.50€",
-            "image": "/images/dishes/ensalada-pollo.png",
+            "image": "/images/dishes/ensalada-pollo.jpg",
             "descriptionKey": "menu_ensalada_pollo_desc",
             "ingredients": [
               "ing_pollo_crujiente",

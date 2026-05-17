@@ -144,6 +144,7 @@ export const cakesData = [
     pt: 'Bolo de chocolate e frutos vermelhos, creme de queijo e chocolate branco, chocolate preto',
     ru: 'Бисквит с шоколадом и красными ягодами, сливочный сыр с белым шоколадом, тёмный шоколад'
   },
+  image: '/images/dishes/red-velvet.jpg',
   price: '4.80€',
   available: true,
   allergens: ['cereales', 'huevos', 'leche']
@@ -345,6 +346,7 @@ export const cakesData = [
     pt: 'tarte de abóbora, Licor 43',
     ru: 'Крем из тыквы, ликёр 43'
   },
+  image: '/images/dishes/pastel-calabaza.jpg',
   price: '4.80€',
   available: true,
   allergens: ['cereales', 'huevos', 'leche']
